@@ -182,7 +182,7 @@
 
 /* Premium Background & Tech Grid Utilities */
 @utility tech-grid {
-  background-image: radial-gradient(rgba(24, 165, 88, 0.05) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(24, 165, 88, 0.04) 1px, transparent 1px);
   background-size: 24px 24px;
 }
 
@@ -196,7 +196,7 @@
     left: -20%;
     width: 60%;
     height: 60%;
-    background: radial-gradient(circle, rgba(24, 165, 88, 0.06) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(24, 165, 88, 0.05) 0%, transparent 70%);
     filter: blur(80px);
     z-index: 0;
     pointer-events: none;
@@ -208,7 +208,7 @@
     right: -20%;
     width: 60%;
     height: 60%;
-    background: radial-gradient(circle, rgba(8, 27, 51, 0.04) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(210, 20, 58, 0.03) 0%, transparent 70%);
     filter: blur(80px);
     z-index: 0;
     pointer-events: none;
@@ -216,6 +216,7 @@
 }
 
 @utility bg-gradient-premium-light {
-  background: linear-gradient(135deg, #ffffff 0%, #f5faf7 50%, #eff5f1 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #fafdfa 50%, #f5faf6 100%);
 }
+
 
