@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "motion/react";
 import logoImg from "../assets/logo.png";
+import { IntroSplash } from "./components/IntroSplash";
 
 // Import local service images
 import termiteImg from "../assets/services/termite.png";
@@ -55,7 +56,7 @@ import {
   Quote, Droplets, FlaskConical, Target, HeartHandshake, Bug,
   ShoppingBag, GraduationCap, Calendar, Wind, Send, Newspaper,
   ChevronRight, Globe, Download, TrendingUp, Twitter, Facebook,
-  Instagram, Linkedin, ChevronLeft, Eye, EyeOff
+  Instagram, Linkedin, ChevronLeft, Eye, EyeOff, Sparkles, RefreshCw
 } from "lucide-react";
 
 // Classy Green, Red, and White SVG Logo Component
@@ -380,27 +381,37 @@ function PageHero({ title, subtitle, page }: { title: string; subtitle: string; 
 
 // ─── Nav ────────────────────────────────────────────────────────────────────────
 
-function Nav({ currentPage, onNavigate }: { currentPage: string; onNavigate: (p: string) => void }) {
+function Nav({
+  currentPage,
+  onNavigate,
+  onReplayIntro,
+}: {
+  currentPage: string;
+  onNavigate: (p: string) => void;
+  onReplayIntro?: () => void;
+}) {
   const scrolled = useScrolled();
   const [menuOpen, setMenuOpen] = useState(false);
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled || currentPage !== "home" ? "bg-[#0C2D1C] shadow-2xl py-3" : "bg-transparent py-5"}`}>
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        <button onClick={() => onNavigate("home")} className="flex items-center gap-3">
-          <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center p-1 overflow-hidden shadow-md">
+        <button onClick={() => onNavigate("home")} className="flex items-center gap-3 group">
+          <div className="w-12 h-12 bg-white border-2 border-[#18A558] rounded-xl flex items-center justify-center p-1 overflow-hidden shadow-md group-hover:scale-105 transition-transform">
             <img src={logoImg} alt="OME Logo" className="w-full h-full object-contain" />
           </div>
           <div className="text-left">
-            <div className="text-white font-extrabold text-xl leading-none tracking-wide" style={{ fontFamily: "Poppins, sans-serif" }}>OME</div>
-            <div className="text-[#18A558] text-[10px] leading-none font-semibold tracking-wider uppercase mt-0.5">Pest Control</div>
+            <div className="text-white font-extrabold text-xl leading-none tracking-wide flex items-center gap-1.5" style={{ fontFamily: "Poppins, sans-serif" }}>
+              OME <span className="w-2 h-2 rounded-full bg-[#D2143A]" />
+            </div>
+            <div className="text-[#18A558] text-[10px] leading-none font-extrabold tracking-wider uppercase mt-0.5">Pest Control</div>
           </div>
         </button>
 
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-7">
           {NAV_LINKS.map((link) => (
             <button key={link.page} onClick={() => onNavigate(link.page)}
-              className={`text-sm font-medium transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-px after:bg-[#18A558] after:transition-all after:duration-300 ${
-                currentPage === link.page ? "text-[#18A558] after:w-full" : "text-white/70 hover:text-white after:w-0 hover:after:w-full"
+              className={`text-sm font-medium transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-[#18A558] after:transition-all after:duration-300 ${
+                currentPage === link.page ? "text-[#18A558] after:w-full font-bold" : "text-white/80 hover:text-white after:w-0 hover:after:w-full"
               }`} style={{ fontFamily: "Inter, sans-serif" }}>
               {link.label}
             </button>
@@ -408,8 +419,19 @@ function Nav({ currentPage, onNavigate }: { currentPage: string; onNavigate: (p:
         </div>
 
         <div className="flex items-center gap-3">
+          {onReplayIntro && (
+            <button
+              onClick={onReplayIntro}
+              title="Replay Logo Intro Animation"
+              className="hidden lg:flex items-center gap-1.5 bg-white text-[#D2143A] hover:bg-[#D2143A] hover:text-white border-2 border-[#D2143A] text-xs font-extrabold px-3.5 py-2 rounded-full shadow-md transition-all hover:scale-105 cursor-pointer uppercase tracking-wider"
+              style={{ fontFamily: "Inter, sans-serif" }}
+            >
+              <RefreshCw size={13} className="animate-spin-slow" /> Replay Intro
+            </button>
+          )}
+
           <button onClick={() => onNavigate("contact")}
-            className="hidden md:flex items-center gap-2 bg-[#D2143A] text-white text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-[#b00f2e] transition-all hover:shadow-lg hover:shadow-[#D2143A]/30">
+            className="hidden md:flex items-center gap-2 bg-[#D2143A] text-white text-sm font-extrabold px-5 py-2.5 rounded-full hover:bg-[#b00f2e] transition-all hover:shadow-lg hover:shadow-[#D2143A]/30">
             <Phone size={13} /> Book Inspection
           </button>
           <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden text-white p-2">
@@ -425,10 +447,21 @@ function Nav({ currentPage, onNavigate }: { currentPage: string; onNavigate: (p:
             <div className="px-6 py-5 flex flex-col gap-4">
               {NAV_LINKS.map((link) => (
                 <button key={link.page} onClick={() => { onNavigate(link.page); setMenuOpen(false); }}
-                  className={`text-left text-sm font-medium ${currentPage === link.page ? "text-[#18A558]" : "text-white/70"}`}>
+                  className={`text-left text-sm font-medium ${currentPage === link.page ? "text-[#18A558] font-bold" : "text-white/70"}`}>
                   {link.label}
                 </button>
               ))}
+              {onReplayIntro && (
+                <button
+                  onClick={() => {
+                    onReplayIntro();
+                    setMenuOpen(false);
+                  }}
+                  className="bg-white text-[#D2143A] border-2 border-[#D2143A] font-extrabold px-5 py-2.5 rounded-full text-xs uppercase tracking-wider flex items-center justify-center gap-2"
+                >
+                  <RefreshCw size={13} /> Replay Intro Animation
+                </button>
+              )}
               <button onClick={() => { onNavigate("contact"); setMenuOpen(false); }}
                 className="bg-[#D2143A] text-white font-semibold px-5 py-3 rounded-full text-sm hover:bg-[#b00f2e]">
                 Book Free Inspection
@@ -458,31 +491,34 @@ function HeroSection({ onNavigate }: { onNavigate: (p: string) => void }) {
       <div className="relative z-10 max-w-7xl mx-auto px-6 pt-28 pb-20 grid lg:grid-cols-2 gap-16 items-center w-full">
         <div>
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 bg-[#D2143A]/15 border border-[#D2143A]/25 text-[#D2143A] text-xs font-semibold px-4 py-2 rounded-full mb-7 backdrop-blur-sm">
-            <BadgeCheck size={13} /> Government Licensed · Rank 1 continues in various pest management services
+            className="inline-flex items-center gap-2 bg-white border-2 border-[#D2143A] text-[#D2143A] text-xs font-extrabold px-4.5 py-2 rounded-full mb-7 shadow-xl">
+            <BadgeCheck size={14} className="text-[#D2143A]" /> Government Licensed · Rank 1 Pest Management Excellence
           </motion.div>
 
           <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.1 }}
             className="text-white mb-6 leading-tight"
             style={{ fontFamily: "Poppins, sans-serif", fontWeight: 800, fontSize: "clamp(2rem, 4.5vw, 3.6rem)" }}>
-            Protecting Homes, Businesses & Industries with{" "}
-            <span className="text-[#18A558]">Advanced Pest Management</span> Solutions
+            Protecting Homes & Businesses with{" "}
+            <span className="inline-block bg-white text-[#D2143A] px-3.5 py-1 rounded-xl shadow-md border border-red-100 font-extrabold my-1">
+              Advanced Pest Management
+            </span>{" "}
+            <span className="text-[#18A558]">Solutions</span>
           </motion.h1>
 
           <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-white/60 text-base mb-9 leading-relaxed max-w-xl" style={{ fontFamily: "Inter, sans-serif" }}>
+            className="text-white/70 text-base mb-9 leading-relaxed max-w-xl" style={{ fontFamily: "Inter, sans-serif" }}>
             Protecting: People's food communities, residential buildings, commercial food & pharmaceuticals, industries, IT & ITES, hospital & hospitalities.
           </motion.p>
 
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}
             className="flex flex-wrap gap-4 mb-11">
             <button onClick={() => onNavigate("contact")}
-              className="flex items-center gap-2 bg-[#D2143A] text-white font-bold px-8 py-4 rounded-full hover:bg-[#b00f2e] transition-all hover:shadow-2xl hover:shadow-[#D2143A]/30 hover:-translate-y-0.5"
+              className="flex items-center gap-2 bg-[#D2143A] text-white font-extrabold px-8 py-4 rounded-full hover:bg-[#b00f2e] transition-all hover:shadow-2xl hover:shadow-[#D2143A]/30 hover:-translate-y-0.5"
               style={{ fontFamily: "Inter, sans-serif" }}>
               Book a Free Inspection <ArrowRight size={17} />
             </button>
             <a href="tel:+919876543210"
-              className="flex items-center gap-2 bg-white/8 backdrop-blur-sm border border-white/15 text-white font-semibold px-8 py-4 rounded-full hover:bg-white/15 transition-all"
+              className="flex items-center gap-2 bg-white text-[#0C2D1C] hover:bg-[#18A558] hover:text-white border-2 border-white font-extrabold px-8 py-4 rounded-full transition-all shadow-lg"
               style={{ fontFamily: "Inter, sans-serif" }}>
               <Phone size={17} /> Call Now
             </a>
@@ -491,8 +527,8 @@ function HeroSection({ onNavigate }: { onNavigate: (p: string) => void }) {
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.5 }}
             className="flex flex-wrap gap-x-6 gap-y-2.5">
             {["Government Licensed", "GST Registered", "Eco-Friendly Treatments", "Odourless Solutions", "100% Professional"].map((item) => (
-              <div key={item} className="flex items-center gap-2 text-white/65 text-sm">
-                <CheckCircle2 size={13} className="text-[#18A558]" />
+              <div key={item} className="flex items-center gap-2 text-white/80 text-sm font-medium">
+                <CheckCircle2 size={14} className="text-[#18A558]" />
                 <span style={{ fontFamily: "Inter, sans-serif" }}>{item}</span>
               </div>
             ))}
@@ -501,19 +537,19 @@ function HeroSection({ onNavigate }: { onNavigate: (p: string) => void }) {
 
         <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.35 }}
           className="hidden lg:block">
-          <div className="bg-white/6 backdrop-blur-xl border border-white/10 rounded-3xl p-8">
-            <p className="text-white/40 text-xs font-semibold tracking-widest uppercase mb-6" style={{ fontFamily: "Inter, sans-serif" }}>Why A.P & T.S Trusts OME Pest</p>
+          <div className="bg-white/8 backdrop-blur-xl border border-white/15 rounded-3xl p-8 shadow-2xl">
+            <p className="text-white/50 text-xs font-bold tracking-widest uppercase mb-6" style={{ fontFamily: "Inter, sans-serif" }}>Why A.P & T.S Trusts OME Pest</p>
             <div className="grid grid-cols-2 gap-4 mb-6">
               {[{ v: "5,000+", l: "Homes Protected" }, { v: "800+", l: "Businesses Served" }, { v: "20+", l: "Years Experience" }, { v: "Rank #1", l: "National Award" }].map((s) => (
-                <div key={s.l} className="bg-white/5 rounded-2xl p-5 text-center border border-white/5">
+                <div key={s.l} className="bg-white/10 rounded-2xl p-5 text-center border border-white/10">
                   <div className="text-[#18A558] font-extrabold text-2xl mb-1" style={{ fontFamily: "Poppins, sans-serif" }}>{s.v}</div>
-                  <div className="text-white/50 text-xs" style={{ fontFamily: "Inter, sans-serif" }}>{s.l}</div>
+                  <div className="text-white/70 text-xs font-semibold" style={{ fontFamily: "Inter, sans-serif" }}>{s.l}</div>
                 </div>
               ))}
             </div>
-            <div className="border-t border-white/8 pt-5">
-              <p className="text-white/35 text-xs text-center mb-3">Authorised chemical partners</p>
-              <div className="flex justify-center gap-8 text-white/40 text-sm font-bold tracking-widest">
+            <div className="border-t border-white/10 pt-5">
+              <p className="text-white/40 text-xs text-center mb-3 font-semibold">Authorised chemical partners</p>
+              <div className="flex justify-center gap-8 text-white/60 text-sm font-extrabold tracking-widest">
                 <span>ENVU</span><span>TATA RALLIS</span><span>FMC</span>
               </div>
             </div>
@@ -521,8 +557,8 @@ function HeroSection({ onNavigate }: { onNavigate: (p: string) => void }) {
         </motion.div>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/30">
-        <span className="text-[10px] tracking-widest uppercase" style={{ fontFamily: "Inter, sans-serif" }}>Scroll</span>
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/40">
+        <span className="text-[10px] tracking-widest uppercase font-bold" style={{ fontFamily: "Inter, sans-serif" }}>Scroll</span>
         <motion.div animate={{ y: [0, 7, 0] }} transition={{ repeat: Infinity, duration: 1.6 }}>
           <ChevronDown size={18} />
         </motion.div>
@@ -539,20 +575,25 @@ function AboutSnapshot({ onNavigate }: { onNavigate: (p: string) => void }) {
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center">
         <FadeIn>
           <div className="relative">
-            <div className="aspect-[4/5] rounded-3xl overflow-hidden bg-gray-100">
+            <div className="aspect-[4/5] rounded-3xl overflow-hidden bg-gray-100 shadow-xl">
               <img src={founderImg}
                 alt="OME Professional Operations" className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0C2D1C]/40 via-transparent to-transparent rounded-3xl" />
             </div>
-            <div className="absolute -right-5 top-10 bg-[#D2143A] text-white rounded-2xl p-5 shadow-2xl border border-white/10">
-              <div className="text-white/80 text-[10px] font-bold tracking-widest uppercase mb-1">🏆 National Award</div>
-              <div className="text-white font-extrabold text-2xl leading-none mb-0.5" style={{ fontFamily: "Poppins, sans-serif" }}>Rank #1</div>
-              <div className="text-white/80 text-xs">Pest Management Excellence</div>
+            {/* White Container with Red text badge for National Award */}
+            <div className="absolute -right-5 top-10 bg-white border-2 border-[#D2143A] text-[#D2143A] rounded-2xl p-5 shadow-2xl">
+              <div className="bg-white text-[#D2143A] text-[11px] font-extrabold tracking-widest uppercase mb-1 flex items-center gap-1">
+                🏆 National Award
+              </div>
+              <div className="text-[#D2143A] font-extrabold text-2xl leading-none mb-0.5" style={{ fontFamily: "Poppins, sans-serif" }}>
+                Rank #1
+              </div>
+              <div className="text-[#0C2D1C] font-semibold text-xs">Pest Management Excellence</div>
             </div>
             <div className="absolute -left-5 bottom-14 bg-[#18A558] text-white rounded-2xl p-5 shadow-2xl">
-              <div className="text-white/70 text-[10px] font-semibold uppercase tracking-wider mb-1">Experience</div>
+              <div className="text-white/80 text-[10px] font-bold uppercase tracking-wider mb-1">Experience</div>
               <div className="text-white font-extrabold text-3xl leading-none" style={{ fontFamily: "Poppins, sans-serif" }}>20+</div>
-              <div className="text-white/80 text-xs">Years of Expertise</div>
+              <div className="text-white/90 text-xs font-semibold">Years of Expertise</div>
             </div>
           </div>
         </FadeIn>
@@ -1116,27 +1157,35 @@ function FinalCTA({ onNavigate }: { onNavigate: (p: string) => void }) {
 
 // ─── Footer ─────────────────────────────────────────────────────────────────────
 
-function Footer({ onNavigate }: { onNavigate: (p: string) => void }) {
+function Footer({
+  onNavigate,
+  onReplayIntro,
+}: {
+  onNavigate: (p: string) => void;
+  onReplayIntro?: () => void;
+}) {
   return (
     <footer className="bg-[#050F1D] text-white">
       <div className="max-w-7xl mx-auto px-6 pt-16 pb-10">
         <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-12 mb-12">
           <div>
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center p-1 overflow-hidden shadow-md">
+              <div className="w-12 h-12 bg-white border-2 border-[#18A558] rounded-xl flex items-center justify-center p-1 overflow-hidden shadow-md">
                 <img src={logoImg} alt="OME Logo" className="w-full h-full object-contain" />
               </div>
               <div className="text-left">
-                <div className="text-white font-extrabold text-xl leading-none tracking-wide" style={{ fontFamily: "Poppins, sans-serif" }}>OME</div>
-                <div className="text-[#18A558] text-[10px] leading-none font-semibold tracking-wider uppercase mt-0.5">Pest Control</div>
+                <div className="text-white font-extrabold text-xl leading-none tracking-wide flex items-center gap-1.5" style={{ fontFamily: "Poppins, sans-serif" }}>
+                  OME <span className="w-2 h-2 rounded-full bg-[#D2143A]" />
+                </div>
+                <div className="text-[#18A558] text-[10px] leading-none font-extrabold tracking-wider uppercase mt-0.5">Pest Control</div>
               </div>
             </div>
-            <p className="text-white/40 text-sm leading-relaxed mb-5" style={{ fontFamily: "Inter, sans-serif" }}>
+            <p className="text-white/50 text-sm leading-relaxed mb-5" style={{ fontFamily: "Inter, sans-serif" }}>
               {"Andhra Pradesh and Telangana's most trusted, government-licensed pest management company."}
             </p>
             <div className="flex flex-wrap gap-2 mb-6">
               {["GST Reg.", "Gov. Licensed", "Certified"].map((b) => (
-                <span key={b} className="text-xs bg-white/8 text-white/50 px-2.5 py-1 rounded-full border border-white/10">{b}</span>
+                <span key={b} className="text-xs bg-white text-[#D2143A] font-bold px-3 py-1 rounded-full border border-red-200 shadow-sm">{b}</span>
               ))}
             </div>
             {/* Social Media */}
@@ -1148,8 +1197,8 @@ function Footer({ onNavigate }: { onNavigate: (p: string) => void }) {
                 { icon: Linkedin, label: "LinkedIn" },
               ].map(({ icon: Icon, label }) => (
                 <a key={label} href="#" aria-label={label}
-                  className="w-8 h-8 bg-white/8 border border-white/10 rounded-lg flex items-center justify-center hover:bg-[#18A558] hover:border-[#18A558] transition-all">
-                  <Icon size={14} className="text-white/60 hover:text-white" />
+                  className="w-8.5 h-8.5 bg-white/8 border border-white/10 rounded-lg flex items-center justify-center hover:bg-[#18A558] hover:border-[#18A558] transition-all">
+                  <Icon size={14} className="text-white/70 hover:text-white" />
                 </a>
               ))}
             </div>
@@ -1202,12 +1251,20 @@ function Footer({ onNavigate }: { onNavigate: (p: string) => void }) {
         </div>
 
         <div className="border-t border-white/8 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-white/25 text-xs" style={{ fontFamily: "Inter, sans-serif" }}>
+          <p className="text-white/40 text-xs" style={{ fontFamily: "Inter, sans-serif" }}>
             © 2024 OME Pest Control Services. All rights reserved. GST: 37XXXXX0000X1ZX
           </p>
-          <div className="flex gap-6">
-            <button className="text-white/25 hover:text-white/60 text-xs transition-colors">Privacy Policy</button>
-            <button className="text-white/25 hover:text-white/60 text-xs transition-colors">Terms of Service</button>
+          <div className="flex items-center gap-5">
+            {onReplayIntro && (
+              <button
+                onClick={onReplayIntro}
+                className="bg-white text-[#D2143A] hover:bg-[#D2143A] hover:text-white border border-[#D2143A] font-extrabold text-xs px-3.5 py-1.5 rounded-full shadow-sm transition-all flex items-center gap-1.5 uppercase tracking-wider"
+              >
+                <RefreshCw size={12} /> Replay Intro
+              </button>
+            )}
+            <button className="text-white/40 hover:text-white/80 text-xs transition-colors">Privacy Policy</button>
+            <button className="text-white/40 hover:text-white/80 text-xs transition-colors">Terms of Service</button>
           </div>
         </div>
       </div>
@@ -1301,7 +1358,7 @@ function AboutPage({ onNavigate }: { onNavigate: (p: string) => void }) {
             <FadeIn delay={0.1}>
               <div className="flex flex-wrap gap-3 mt-4 mb-6">
                 {["Top Operations Managers", "Rank #1 in Pest Management", "20+ Years Experience"].map((badge) => (
-                  <span key={badge} className="text-xs bg-[#18A558]/10 text-[#18A558] font-semibold px-3 py-1.5 rounded-full border border-[#18A558]/20">{badge}</span>
+                  <span key={badge} className="text-xs bg-white text-[#D2143A] font-extrabold px-3.5 py-1.5 rounded-full border border-red-200 shadow-sm">{badge}</span>
                 ))}
               </div>
               <p className="text-gray-500 mb-4 leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
@@ -1317,12 +1374,12 @@ function AboutPage({ onNavigate }: { onNavigate: (p: string) => void }) {
           </div>
           <FadeIn delay={0.1} className="order-1 lg:order-2">
             <div className="relative">
-              <div className="aspect-[3/4] rounded-3xl overflow-hidden bg-gray-100">
+              <div className="aspect-[3/4] rounded-3xl overflow-hidden bg-gray-100 shadow-xl">
                 <img src={aboutFounderImg}
                   alt="OME Professional Operations" className="w-full h-full object-cover" />
               </div>
-              <div className="absolute -bottom-5 -right-5 bg-[#18A558] rounded-2xl p-5 text-white shadow-2xl">
-                <div className="text-white/70 text-xs mb-1">National Award</div>
+              <div className="absolute -bottom-5 -right-5 bg-white border-2 border-[#D2143A] rounded-2xl p-5 text-[#D2143A] shadow-2xl">
+                <div className="text-[#D2143A] font-bold text-xs uppercase tracking-wider mb-1">National Award</div>
                 <div className="font-extrabold text-2xl leading-none" style={{ fontFamily: "Poppins, sans-serif" }}>Rank #1</div>
               </div>
             </div>
@@ -1341,9 +1398,9 @@ function AboutPage({ onNavigate }: { onNavigate: (p: string) => void }) {
               { label: "Commitment", text: "We never compromise on chemical safety, treatment quality, or post-service care. Every client receives warranty-backed service and dedicated follow-up." },
             ].map((item, i) => (
               <FadeIn key={item.label} delay={i * 0.1}>
-                <div className="bg-white/5 border border-white/8 rounded-3xl p-8">
-                  <div className="text-[#18A558] font-bold mb-3" style={{ fontFamily: "Poppins, sans-serif" }}>{item.label}</div>
-                  <p className="text-white/55 text-sm leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>{item.text}</p>
+                <div className="bg-white/5 border border-white/10 rounded-3xl p-8">
+                  <div className="text-[#18A558] font-bold mb-3 text-lg" style={{ fontFamily: "Poppins, sans-serif" }}>{item.label}</div>
+                  <p className="text-white/70 text-sm leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>{item.text}</p>
                 </div>
               </FadeIn>
             ))}
@@ -1351,7 +1408,7 @@ function AboutPage({ onNavigate }: { onNavigate: (p: string) => void }) {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
             {["Integrity", "Safety", "Innovation", "Professionalism", "Trust", "Transparency"].map((v, i) => (
               <FadeIn key={v} delay={i * 0.05}>
-                <div className="text-center bg-white/4 border border-white/8 rounded-2xl py-5 px-3">
+                <div className="text-center bg-white/5 border border-white/10 rounded-2xl py-5 px-3">
                   <div className="w-8 h-8 bg-[#18A558]/20 rounded-xl flex items-center justify-center mx-auto mb-3">
                     <CheckCircle2 size={16} className="text-[#18A558]" />
                   </div>
@@ -2013,15 +2070,27 @@ function ContactPage() {
 
 export default function App() {
   const [page, setPage] = useState("home");
+  const [showIntro, setShowIntro] = useState(true);
 
   const navigate = (p: string) => {
     setPage(p);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const handleReplayIntro = () => {
+    setShowIntro(true);
+  };
+
   return (
     <div className="bg-background text-foreground min-h-screen" style={{ fontFamily: "Inter, sans-serif" }}>
-      <Nav currentPage={page} onNavigate={navigate} />
+      {/* Animated Insect Dispersion & Logo Splash Screen */}
+      <AnimatePresence>
+        {showIntro && (
+          <IntroSplash onComplete={() => setShowIntro(false)} />
+        )}
+      </AnimatePresence>
+
+      <Nav currentPage={page} onNavigate={navigate} onReplayIntro={handleReplayIntro} />
       <AnimatePresence mode="wait">
         <motion.div key={page} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }}>
           {page === "home" && <HomePage onNavigate={navigate} />}
@@ -2029,7 +2098,7 @@ export default function App() {
           {page === "services" && <ServicesPage onNavigate={navigate} />}
           {page === "blog" && <BlogPage />}
           {page === "contact" && <ContactPage />}
-          <Footer onNavigate={navigate} />
+          <Footer onNavigate={navigate} onReplayIntro={handleReplayIntro} />
         </motion.div>
       </AnimatePresence>
       <FloatingButtons onNavigate={navigate} />
