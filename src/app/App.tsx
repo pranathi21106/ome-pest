@@ -597,27 +597,27 @@ function HeroSection({ onNavigate }: { onNavigate: (p: string) => void }) {
 function AboutSnapshot({ onNavigate }: { onNavigate: (p: string) => void }) {
   return (
     <section className="py-28 bg-gradient-premium-light tech-grid bg-mesh-glow">
-      <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center">
+      <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
         <FadeIn>
-          <div className="relative">
-            <div className="aspect-[4/5] rounded-3xl overflow-hidden bg-white shadow-2xl border-4 border-[#18A558]/30">
+          <div className="relative max-w-md mx-auto lg:max-w-none">
+            {/* Outer container matches the photo's exact 1:1 square dimensions */}
+            <div className="aspect-square rounded-3xl overflow-hidden bg-white shadow-2xl border-4 border-[#18A558] p-2 flex items-center justify-center">
               <img src={omePestPosterImg}
-                alt="OME Pest Control Services & Water Proofing Services" className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0C2D1C]/40 via-transparent to-transparent rounded-3xl" />
+                alt="OME Pest Control Services & Water Proofing Services" className="w-full h-full object-contain rounded-2xl shadow-sm" />
             </div>
             {/* White Container with Red text badge for National Award */}
-            <div className="absolute -right-5 top-10 bg-white border-2 border-[#D2143A] text-[#D2143A] rounded-2xl p-5 shadow-2xl">
-              <div className="bg-white text-[#D2143A] text-[11px] font-extrabold tracking-widest uppercase mb-1 flex items-center gap-1">
+            <div className="absolute -right-3 -top-3 md:-right-5 md:top-6 bg-white border-2 border-[#D2143A] text-[#D2143A] rounded-2xl p-4 md:p-5 shadow-2xl z-20">
+              <div className="bg-white text-[#D2143A] text-[10px] md:text-[11px] font-extrabold tracking-widest uppercase mb-1 flex items-center gap-1">
                 🏆 National Award
               </div>
-              <div className="text-[#D2143A] font-extrabold text-2xl leading-none mb-0.5" style={{ fontFamily: "Poppins, sans-serif" }}>
+              <div className="text-[#D2143A] font-extrabold text-xl md:text-2xl leading-none mb-0.5" style={{ fontFamily: "Poppins, sans-serif" }}>
                 Rank #1
               </div>
               <div className="text-[#0C2D1C] font-semibold text-xs">Pest Management Excellence</div>
             </div>
-            <div className="absolute -left-5 bottom-14 bg-[#18A558] text-white rounded-2xl p-5 shadow-2xl">
+            <div className="absolute -left-3 -bottom-3 md:-left-5 md:bottom-6 bg-[#18A558] text-white rounded-2xl p-4 md:p-5 shadow-2xl z-20">
               <div className="text-white/80 text-[10px] font-bold uppercase tracking-wider mb-1">Experience</div>
-              <div className="text-white font-extrabold text-3xl leading-none" style={{ fontFamily: "Poppins, sans-serif" }}>20+</div>
+              <div className="text-white font-extrabold text-2xl md:text-3xl leading-none" style={{ fontFamily: "Poppins, sans-serif" }}>20+</div>
               <div className="text-white/90 text-xs font-semibold">Years of Expertise</div>
             </div>
           </div>
@@ -1382,38 +1382,29 @@ function AboutPage({ onNavigate }: { onNavigate: (p: string) => void }) {
         </div>
       </section>
 
-      {/* Founder */}
-      <section className="py-24 bg-gradient-premium-light tech-grid bg-mesh-glow">
-        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center">
-          <div className="order-2 lg:order-1">
-            <FadeIn><SectionTag>Meet the Founders</SectionTag><SectionHeading>T.K.C Dev & Venkateshwarulu</SectionHeading></FadeIn>
-            <FadeIn delay={0.1}>
-              <div className="flex flex-wrap gap-3 mt-4 mb-6">
-                {["Top Operations Managers", "Rank #1 in Pest Management", "20+ Years Experience"].map((badge) => (
-                  <span key={badge} className="text-xs bg-white text-[#D2143A] font-extrabold px-3.5 py-1.5 rounded-full border border-red-200 shadow-sm">{badge}</span>
-                ))}
-              </div>
-              <p className="text-gray-500 mb-4 leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
-                T.K.C Dev & Venkateshwarulu bring over 20+ years of deep expertise in pest management operations, team leadership, and customer-first service delivery. Their philosophy is simple: every client deserves the same precision, care, and professionalism — whether they're a family in a one-bedroom apartment or the manager of a 50-room hotel.
+      {/* Founders Leadership Matter */}
+      <section className="py-20 bg-gradient-premium-light tech-grid bg-mesh-glow">
+        <div className="max-w-5xl mx-auto px-6">
+          <FadeIn className="text-center mb-8">
+            <SectionTag>Leadership & Management</SectionTag>
+            <SectionHeading>T.K.C Dev & Venkateshwarulu</SectionHeading>
+            <div className="flex flex-wrap gap-3 justify-center mt-4 mb-2">
+              {["Top Operations Managers", "Rank #1 in Pest Management", "20+ Years Experience", "NIPH Certified"].map((badge) => (
+                <span key={badge} className="text-xs bg-white text-[#D2143A] font-extrabold px-4 py-1.5 rounded-full border border-red-200 shadow-sm">{badge}</span>
+              ))}
+            </div>
+          </FadeIn>
+          <FadeIn delay={0.1}>
+            <div className="bg-white rounded-3xl p-8 md:p-10 border border-gray-100 shadow-lg space-y-5">
+              <p className="text-gray-600 text-base leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
+                <strong>T.K.C Dev & Venkateshwarulu</strong> bring over 20+ years of deep expertise in pest management operations, team leadership, and customer-first service delivery. Their philosophy is simple: every client deserves the same precision, care, and professionalism — whether they're a family in a one-bedroom apartment or the manager of a 50-room hotel or pharmaceutical facility.
               </p>
-              <p className="text-gray-500 mb-4 leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
-                Their recognition as Rank 1 pest management leaders isn't just personal achievement — it's a reflection of the standards they have built into every aspect of OME's operations, from chemical selection to technician training to post-treatment follow-up.
+              <p className="text-gray-600 text-base leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
+                Their recognition as Rank 1 pest management leaders isn't just personal achievement — it's a reflection of the rigorous quality standards they have built into every aspect of OME's operations, from chemical selection to technician training to post-treatment follow-up and waterproofing excellence.
               </p>
-              <p className="text-gray-500 leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
-                Under their leadership, OME became one of the first companies in Andhra Pradesh and Telangana to offer no-drill reticulation technology — a commitment to innovation that defines the company's future.
+              <p className="text-gray-600 text-base leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
+                Under their leadership, OME became one of the first companies in A.P, T.S, ODISSA to offer no-drill advanced technology and certified urban pest management — a commitment to innovation that defines the company's future.
               </p>
-            </FadeIn>
-          </div>
-          <FadeIn delay={0.1} className="order-1 lg:order-2">
-            <div className="relative">
-              <div className="aspect-[3/4] rounded-3xl overflow-hidden bg-gray-100 shadow-xl">
-                <img src={aboutFounderImg}
-                  alt="OME Professional Operations" className="w-full h-full object-cover" />
-              </div>
-              <div className="absolute -bottom-5 -right-5 bg-white border-2 border-[#D2143A] rounded-2xl p-5 text-[#D2143A] shadow-2xl">
-                <div className="text-[#D2143A] font-bold text-xs uppercase tracking-wider mb-1">National Award</div>
-                <div className="font-extrabold text-2xl leading-none" style={{ fontFamily: "Poppins, sans-serif" }}>Rank #1</div>
-              </div>
             </div>
           </FadeIn>
         </div>
