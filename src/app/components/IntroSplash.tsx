@@ -394,7 +394,7 @@ export function IntroSplash({ onComplete, isReplay = false }: IntroSplashProps) 
                   Warning: Active Infestation (Termites, Rats, Cockroaches, Flies)
                 </div>
                 <p className="text-white/70 text-xs font-semibold" style={{ fontFamily: "Inter, sans-serif" }}>
-                  Infesting Residential & Commercial Premises Across AP & TS
+                  Infesting Residential & Commercial Premises Across A.P, T.S, ODISSA
                 </p>
               </motion.div>
             )}
@@ -443,9 +443,9 @@ export function IntroSplash({ onComplete, isReplay = false }: IntroSplashProps) 
                 exit={{ opacity: 0 }}
                 className="flex flex-col items-center gap-2"
               >
-                <div className="bg-white border-2 border-[#D2143A] text-[#D2143A] text-sm font-extrabold px-7 py-2.5 rounded-full shadow-2xl tracking-widest uppercase flex items-center gap-2">
+                <div className="bg-white border-2 border-[#D2143A] text-[#D2143A] text-xs md:text-sm font-extrabold px-7 py-2.5 rounded-full shadow-2xl tracking-widest uppercase flex items-center gap-2">
                   <Sparkles className="w-4 h-4 text-[#18A558]" />
-                  OME PEST CONTROL SERVICES
+                  OME PEST CONTROL SERVICES & WATER PROOFING SERVICES
                 </div>
                 <p className="text-[#18A558] text-xs font-extrabold tracking-wide uppercase bg-black/40 px-4 py-1 rounded-full border border-[#18A558]/40">
                   Govt Licensed · Rank #1 Pest Management

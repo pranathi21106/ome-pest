@@ -1,11 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "motion/react";
 import logoImg from "../assets/logo.png";
+import omePestPosterImg from "../assets/ome_pest_poster.jpg";
 import { IntroSplash } from "./components/IntroSplash";
 
 // Import local service images
 import termiteImg from "../assets/services/termite.png";
-import cockroachImg from "../assets/services/cockroach.png";
+import cockroachImg from "../assets/services/coackroach.png";
 import rodentImg from "../assets/services/rodent.png";
 import bedBugImg from "../assets/services/bed_bug.png";
 import mosquitoImg from "../assets/services/mosquito.png";
@@ -85,12 +86,12 @@ const NAV_LINKS = [
 ];
 
 const WHY_CHOOSE = [
-  { icon: BadgeCheck, title: "Government Licensed", desc: "Fully licensed and compliant with state and national regulations in Andhra Pradesh and Telangana." },
-  { icon: Award, title: "Certified Professionals", desc: "Our technicians hold certified training in advanced pest management techniques and safety protocols." },
-  { icon: Zap, title: "Latest Technologies", desc: "Hidden reticulation systems and no-drill methods for seamless, damage-free treatments." },
+  { icon: BadgeCheck, title: "Government Licensed", desc: "Fully licensed and compliant with state and national regulations in A.P, T.S, ODISSA." },
+  { icon: Award, title: "Certified Professionals", desc: "Government - Certified by NIPH Govt of India & Food safety implementation programme (urban pest management)." },
+  { icon: Zap, title: "Latest Technologies", desc: "Concealed piping systems and no-drill methods for seamless, damage-free treatments." },
   { icon: FlaskConical, title: "Industry Approved Chemicals", desc: "Safe, odourless chemicals from Envu, Tata Rallis, and FMC — internationally trusted brands." },
   { icon: Target, title: "Affordable Pricing", desc: "Premium service at transparent, competitive rates with no hidden charges or surprise fees." },
-  { icon: HeartHandshake, title: "Guaranteed Satisfaction", desc: "We stand behind every treatment with service warranties and comprehensive follow-up visits." },
+  { icon: HeartHandshake, title: "Guaranteed Satisfaction", desc: "We stand behind every treatment with service warranty and comprehensive follow-up visits." },
 ];
 
 const SERVICES = [
@@ -393,61 +394,65 @@ function Nav({
   const scrolled = useScrolled();
   const [menuOpen, setMenuOpen] = useState(false);
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled || currentPage !== "home" ? "bg-[#0C2D1C] shadow-2xl py-3" : "bg-transparent py-5"}`}>
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        <button onClick={() => onNavigate("home")} className="flex items-center gap-3 group">
-          <div className="w-12 h-12 bg-white border-2 border-[#18A558] rounded-xl flex items-center justify-center p-1 overflow-hidden shadow-md group-hover:scale-105 transition-transform">
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled || currentPage !== "home" ? "bg-[#0C2D1C] shadow-2xl py-3" : "bg-gradient-to-b from-[#0C2D1C]/95 via-[#0C2D1C]/80 to-transparent py-3 md:py-4"}`}>
+      <div className="max-w-7xl mx-auto px-4 md:px-6 flex flex-col lg:flex-row items-center justify-between gap-3">
+        {/* Logo & Highlighted Capital Title Container */}
+        <button onClick={() => onNavigate("home")} className="flex items-center gap-2.5 md:gap-3 group text-left">
+          <div className="w-10 h-10 md:w-12 md:h-12 bg-white border-2 border-[#18A558] rounded-xl flex items-center justify-center p-1 overflow-hidden shadow-xl group-hover:scale-105 transition-transform shrink-0">
             <img src={logoImg} alt="OME Logo" className="w-full h-full object-contain" />
           </div>
-          <div className="text-left">
-            <div className="text-white font-extrabold text-xl leading-none tracking-wide flex items-center gap-1.5" style={{ fontFamily: "Poppins, sans-serif" }}>
-              OME <span className="w-2 h-2 rounded-full bg-[#D2143A]" />
-            </div>
-            <div className="text-[#18A558] text-[10px] leading-none font-extrabold tracking-wider uppercase mt-0.5">Pest Control</div>
+          {/* Highlighted Big Red & White Badge Title - 100% visible without text cut-off */}
+          <div className="bg-white border-2 border-[#D2143A] text-[#D2143A] px-3.5 py-1.5 md:px-5 md:py-2 rounded-2xl shadow-xl font-black text-xs sm:text-sm md:text-sm lg:text-base uppercase tracking-wider flex items-center">
+            <span className="font-black tracking-wider leading-tight text-left">
+              OME PEST CONTROL SERVICES & WATER PROOFING SERVICES
+            </span>
           </div>
         </button>
 
-        <div className="hidden md:flex items-center gap-7">
-          {NAV_LINKS.map((link) => (
-            <button key={link.page} onClick={() => onNavigate(link.page)}
-              className={`text-sm font-medium transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-[#18A558] after:transition-all after:duration-300 ${
-                currentPage === link.page ? "text-[#18A558] after:w-full font-bold" : "text-white/80 hover:text-white after:w-0 hover:after:w-full"
-              }`} style={{ fontFamily: "Inter, sans-serif" }}>
-              {link.label}
-            </button>
-          ))}
-        </div>
+        {/* Navigation Links and Buttons */}
+        <div className="flex items-center gap-4 md:gap-6 flex-wrap justify-center">
+          <div className="hidden lg:flex items-center gap-6">
+            {NAV_LINKS.map((link) => (
+              <button key={link.page} onClick={() => onNavigate(link.page)}
+                className={`text-sm font-bold uppercase tracking-wider transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-[#18A558] after:transition-all after:duration-300 ${
+                  currentPage === link.page ? "text-[#18A558] after:w-full font-black" : "text-white/90 hover:text-white after:w-0 hover:after:w-full"
+                }`} style={{ fontFamily: "Inter, sans-serif" }}>
+                {link.label}
+              </button>
+            ))}
+          </div>
 
-        <div className="flex items-center gap-3">
-          {onReplayIntro && (
-            <button
-              onClick={onReplayIntro}
-              title="Replay Logo Intro Animation"
-              className="hidden lg:flex items-center gap-1.5 bg-white text-[#D2143A] hover:bg-[#D2143A] hover:text-white border-2 border-[#D2143A] text-xs font-extrabold px-3.5 py-2 rounded-full shadow-md transition-all hover:scale-105 cursor-pointer uppercase tracking-wider"
-              style={{ fontFamily: "Inter, sans-serif" }}
-            >
-              <RefreshCw size={13} className="animate-spin-slow" /> Replay Intro
-            </button>
-          )}
+          <div className="flex items-center gap-2 md:gap-3">
+            {onReplayIntro && (
+              <button
+                onClick={onReplayIntro}
+                title="Replay Logo Intro Animation"
+                className="hidden xl:flex items-center gap-1.5 bg-white text-[#D2143A] hover:bg-[#D2143A] hover:text-white border-2 border-[#D2143A] text-xs font-black px-3.5 py-2 rounded-full shadow-md transition-all hover:scale-105 cursor-pointer uppercase tracking-wider"
+                style={{ fontFamily: "Inter, sans-serif" }}
+              >
+                <RefreshCw size={13} className="animate-spin-slow" /> Replay Intro
+              </button>
+            )}
 
-          <button onClick={() => onNavigate("contact")}
-            className="hidden md:flex items-center gap-2 bg-[#D2143A] text-white text-sm font-extrabold px-5 py-2.5 rounded-full hover:bg-[#b00f2e] transition-all hover:shadow-lg hover:shadow-[#D2143A]/30">
-            <Phone size={13} /> Book Inspection
-          </button>
-          <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden text-white p-2">
-            {menuOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
+            <button onClick={() => onNavigate("contact")}
+              className="hidden md:flex items-center gap-2 bg-[#D2143A] text-white text-xs md:text-sm font-black px-4 py-2.5 rounded-full hover:bg-[#b00f2e] transition-all hover:shadow-lg hover:shadow-[#D2143A]/30 uppercase tracking-wider">
+              <Phone size={13} /> Book Inspection
+            </button>
+            <button onClick={() => setMenuOpen(!menuOpen)} className="lg:hidden text-white p-2 bg-white/10 rounded-lg">
+              {menuOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
+          </div>
         </div>
       </div>
 
       <AnimatePresence>
         {menuOpen && (
           <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-[#0C2D1C] border-t border-white/10 overflow-hidden">
+            className="lg:hidden bg-[#0C2D1C] border-t border-white/10 overflow-hidden">
             <div className="px-6 py-5 flex flex-col gap-4">
               {NAV_LINKS.map((link) => (
                 <button key={link.page} onClick={() => { onNavigate(link.page); setMenuOpen(false); }}
-                  className={`text-left text-sm font-medium ${currentPage === link.page ? "text-[#18A558] font-bold" : "text-white/70"}`}>
+                  className={`text-left text-sm font-bold uppercase tracking-wider ${currentPage === link.page ? "text-[#18A558] font-black" : "text-white/80"}`}>
                   {link.label}
                 </button>
               ))}
@@ -463,7 +468,7 @@ function Nav({
                 </button>
               )}
               <button onClick={() => { onNavigate("contact"); setMenuOpen(false); }}
-                className="bg-[#D2143A] text-white font-semibold px-5 py-3 rounded-full text-sm hover:bg-[#b00f2e]">
+                className="bg-[#D2143A] text-white font-extrabold px-5 py-3 rounded-full text-sm hover:bg-[#b00f2e] uppercase tracking-wider">
                 Book Free Inspection
               </button>
             </div>
@@ -478,7 +483,7 @@ function Nav({
 
 function HeroSection({ onNavigate }: { onNavigate: (p: string) => void }) {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-[#0C2D1C]">
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-[#0C2D1C] pt-28 md:pt-36">
       <div className="absolute inset-0">
         <img src={heroBgImg}
           alt="Modern protected building" className="w-full h-full object-cover opacity-20" />
@@ -488,68 +493,88 @@ function HeroSection({ onNavigate }: { onNavigate: (p: string) => void }) {
       <div className="absolute right-0 top-0 w-1/2 h-full opacity-10"
         style={{ backgroundImage: "radial-gradient(ellipse at 80% 40%, #18A558 0%, transparent 65%)" }} />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 pt-28 pb-20 grid lg:grid-cols-2 gap-16 items-center w-full">
-        <div>
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-12 grid lg:grid-cols-12 gap-10 items-center w-full">
+        <div className="lg:col-span-7">
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 bg-white border-2 border-[#D2143A] text-[#D2143A] text-xs font-extrabold px-4.5 py-2 rounded-full mb-7 shadow-xl">
-            <BadgeCheck size={14} className="text-[#D2143A]" /> Government Licensed · Rank 1 Pest Management Excellence
+            className="inline-flex flex-wrap items-center gap-2 bg-white border-2 border-[#D2143A] text-[#D2143A] text-xs md:text-sm font-extrabold px-4.5 py-2.5 rounded-full mb-6 shadow-2xl">
+            <BadgeCheck size={16} className="text-[#D2143A] shrink-0" /> Government Licensed · Rank 1 Pest Management Excellence
           </motion.div>
 
+          {/* Bold Header Line specified by user */}
           <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.1 }}
             className="text-white mb-6 leading-tight"
-            style={{ fontFamily: "Poppins, sans-serif", fontWeight: 800, fontSize: "clamp(2rem, 4.5vw, 3.6rem)" }}>
-            Protecting Homes & Businesses with{" "}
+            style={{ fontFamily: "Poppins, sans-serif", fontWeight: 800, fontSize: "clamp(1.8rem, 3.8vw, 3.2rem)" }}>
+            <span className="font-extrabold text-white block mb-2">Protecting Domestic & Commercial food and Pharma & hospitality</span>{" "}
             <span className="inline-block bg-white text-[#D2143A] px-3.5 py-1 rounded-xl shadow-md border border-red-100 font-extrabold my-1">
-              Advanced Pest Management
+              Advanced Pest Management & Waterproofing
             </span>{" "}
             <span className="text-[#18A558]">Solutions</span>
           </motion.h1>
 
           <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-white/70 text-base mb-9 leading-relaxed max-w-xl" style={{ fontFamily: "Inter, sans-serif" }}>
-            Protecting: People's food communities, residential buildings, commercial food & pharmaceuticals, industries, IT & ITES, hospital & hospitalities.
+            className="text-white/80 text-base mb-7 leading-relaxed max-w-2xl font-medium" style={{ fontFamily: "Inter, sans-serif" }}>
+            Protecting: People's food communities, residential buildings, commercial food & pharmaceuticals, industries, IT & ITES, hospital & hospitalities across <strong>A.P, T.S, ODISSA</strong>.
           </motion.p>
 
+          {/* New Add-Ons Badges */}
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.25 }}
+            className="flex flex-col sm:flex-row gap-3 mb-8">
+            <div className="bg-white/10 border border-white/20 text-white text-xs font-bold px-4 py-2.5 rounded-xl backdrop-blur-md flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#18A558] shrink-0" />
+              Governement - Certified by NIPH Govt of India.
+            </div>
+            <div className="bg-white/10 border border-white/20 text-white text-xs font-bold px-4 py-2.5 rounded-xl backdrop-blur-md flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#D2143A] shrink-0" />
+              Food safety implementation programme (urban pest management)
+            </div>
+          </motion.div>
+
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex flex-wrap gap-4 mb-11">
+            className="flex flex-wrap gap-4 mb-9">
             <button onClick={() => onNavigate("contact")}
-              className="flex items-center gap-2 bg-[#D2143A] text-white font-extrabold px-8 py-4 rounded-full hover:bg-[#b00f2e] transition-all hover:shadow-2xl hover:shadow-[#D2143A]/30 hover:-translate-y-0.5"
+              className="flex items-center gap-2 bg-[#D2143A] text-white font-extrabold px-7 py-4 rounded-full hover:bg-[#b00f2e] transition-all hover:shadow-2xl hover:shadow-[#D2143A]/30 hover:-translate-y-0.5"
               style={{ fontFamily: "Inter, sans-serif" }}>
               Book a Free Inspection <ArrowRight size={17} />
             </button>
-            <a href="tel:+919876543210"
-              className="flex items-center gap-2 bg-white text-[#0C2D1C] hover:bg-[#18A558] hover:text-white border-2 border-white font-extrabold px-8 py-4 rounded-full transition-all shadow-lg"
+            <a href="tel:+919492081706"
+              className="flex items-center gap-2 bg-white text-[#0C2D1C] hover:bg-[#18A558] hover:text-white border-2 border-white font-extrabold px-6 py-4 rounded-full transition-all shadow-lg text-sm"
               style={{ fontFamily: "Inter, sans-serif" }}>
-              <Phone size={17} /> Call Now
+              <Phone size={17} /> Call: 9492081706
+            </a>
+            <a href="tel:+919704246709"
+              className="flex items-center gap-2 bg-[#18A558] text-white hover:bg-[#15934d] font-extrabold px-6 py-4 rounded-full transition-all shadow-lg text-sm"
+              style={{ fontFamily: "Inter, sans-serif" }}>
+              <Phone size={17} /> Call: 9704246709
             </a>
           </motion.div>
 
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.5 }}
             className="flex flex-wrap gap-x-6 gap-y-2.5">
-            {["Government Licensed", "GST Registered", "Eco-Friendly Treatments", "Odourless Solutions", "100% Professional"].map((item) => (
-              <div key={item} className="flex items-center gap-2 text-white/80 text-sm font-medium">
-                <CheckCircle2 size={14} className="text-[#18A558]" />
+            {["Government Licensed", "Certified by NIPH", "A.P, T.S, ODISSA Coverage", "Eco-Friendly Treatments", "Odourless Solutions"].map((item) => (
+              <div key={item} className="flex items-center gap-2 text-white/90 text-sm font-semibold">
+                <CheckCircle2 size={15} className="text-[#18A558] shrink-0" />
                 <span style={{ fontFamily: "Inter, sans-serif" }}>{item}</span>
               </div>
             ))}
           </motion.div>
         </div>
 
+        {/* Featured Showcase Container with Chemical Partners Dashboard */}
         <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.35 }}
-          className="hidden lg:block">
-          <div className="bg-white/8 backdrop-blur-xl border border-white/15 rounded-3xl p-8 shadow-2xl">
-            <p className="text-white/50 text-xs font-bold tracking-widest uppercase mb-6" style={{ fontFamily: "Inter, sans-serif" }}>Why A.P & T.S Trusts OME Pest</p>
-            <div className="grid grid-cols-2 gap-4 mb-6">
+          className="lg:col-span-5">
+          <div className="bg-white/8 backdrop-blur-xl border border-white/15 rounded-3xl p-6 shadow-2xl">
+            <p className="text-white/60 text-xs font-bold tracking-widest uppercase mb-5" style={{ fontFamily: "Inter, sans-serif" }}>Why A.P, T.S, ODISSA Trusts OME Pest</p>
+            <div className="grid grid-cols-2 gap-3.5 mb-6">
               {[{ v: "5,000+", l: "Homes Protected" }, { v: "800+", l: "Businesses Served" }, { v: "20+", l: "Years Experience" }, { v: "Rank #1", l: "National Award" }].map((s) => (
-                <div key={s.l} className="bg-white/10 rounded-2xl p-5 text-center border border-white/10">
-                  <div className="text-[#18A558] font-extrabold text-2xl mb-1" style={{ fontFamily: "Poppins, sans-serif" }}>{s.v}</div>
-                  <div className="text-white/70 text-xs font-semibold" style={{ fontFamily: "Inter, sans-serif" }}>{s.l}</div>
+                <div key={s.l} className="bg-white/10 rounded-2xl p-4 text-center border border-white/10">
+                  <div className="text-[#18A558] font-extrabold text-xl md:text-2xl mb-1" style={{ fontFamily: "Poppins, sans-serif" }}>{s.v}</div>
+                  <div className="text-white/80 text-xs font-semibold" style={{ fontFamily: "Inter, sans-serif" }}>{s.l}</div>
                 </div>
               ))}
             </div>
             <div className="border-t border-white/10 pt-5">
-              <p className="text-white/40 text-xs text-center mb-3 font-semibold">Authorised chemical partners</p>
-              <div className="flex justify-center gap-8 text-white/60 text-sm font-extrabold tracking-widest">
+              <p className="text-white/50 text-xs text-center mb-3 font-semibold">Authorised chemical partners</p>
+              <div className="flex justify-center gap-8 text-white/80 text-sm font-extrabold tracking-widest">
                 <span>ENVU</span><span>TATA RALLIS</span><span>FMC</span>
               </div>
             </div>
@@ -557,10 +582,10 @@ function HeroSection({ onNavigate }: { onNavigate: (p: string) => void }) {
         </motion.div>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/40">
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-white/40">
         <span className="text-[10px] tracking-widest uppercase font-bold" style={{ fontFamily: "Inter, sans-serif" }}>Scroll</span>
-        <motion.div animate={{ y: [0, 7, 0] }} transition={{ repeat: Infinity, duration: 1.6 }}>
-          <ChevronDown size={18} />
+        <motion.div animate={{ y: [0, 5, 0] }} transition={{ repeat: Infinity, duration: 1.6 }}>
+          <ChevronDown size={16} />
         </motion.div>
       </div>
     </section>
@@ -575,9 +600,9 @@ function AboutSnapshot({ onNavigate }: { onNavigate: (p: string) => void }) {
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center">
         <FadeIn>
           <div className="relative">
-            <div className="aspect-[4/5] rounded-3xl overflow-hidden bg-gray-100 shadow-xl">
-              <img src={founderImg}
-                alt="OME Professional Operations" className="w-full h-full object-cover" />
+            <div className="aspect-[4/5] rounded-3xl overflow-hidden bg-white shadow-2xl border-4 border-[#18A558]/30">
+              <img src={omePestPosterImg}
+                alt="OME Pest Control Services & Water Proofing Services" className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0C2D1C]/40 via-transparent to-transparent rounded-3xl" />
             </div>
             {/* White Container with Red text badge for National Award */}
@@ -599,29 +624,29 @@ function AboutSnapshot({ onNavigate }: { onNavigate: (p: string) => void }) {
         </FadeIn>
 
         <div>
-          <FadeIn delay={0.1}><SectionTag>Who Is OME Pest?</SectionTag><SectionHeading>{"Andhra Pradesh and Telangana's Most Trusted Pest Management Leader"}</SectionHeading></FadeIn>
+          <FadeIn delay={0.1}><SectionTag>Who Is OME Pest?</SectionTag><SectionHeading>{"A.P, T.S, ODISSA's Most Trusted Pest Management & Waterproofing Leader"}</SectionHeading></FadeIn>
           <FadeIn delay={0.15}>
-            <p className="text-gray-500 mt-5 mb-4 leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
-              Founded by <strong className="text-[#0C2D1C]">T.K.C Dev & Venkateshwarulu</strong> — OME Pest Control Services is the most trusted management leader, continuing its Rank 1 status across various pest management services. Our company was built on a single premise: every home, business, and institution deserves world-class protection without compromise.
+            <p className="text-gray-600 mt-5 mb-4 leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
+              Founded by <strong className="text-[#0C2D1C]">T.K.C Dev & Venkateshwarulu</strong> — <strong>OME PEST CONTROL SERVICES & WATER PROOFING SERVICES</strong> is the most trusted management leader, continuing its Rank 1 status across various pest management services. Our company was built on a single premise: every home, business, and institution deserves world-class protection without compromise.
             </p>
-            <p className="text-gray-500 mb-8 leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
-              With over 20+ years of hands-on expertise, government licensing, and partnerships with globally trusted chemical brands, we've become the benchmark for professional pest management across Andhra Pradesh and Telangana.
+            <p className="text-gray-600 mb-6 leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
+              With over 20+ years of hands-on expertise, government licensing, <strong>Government - Certified by NIPH Govt of India</strong>, and <strong>Food safety implementation programme (urban pest management)</strong>, we are the benchmark for professional pest management across <strong>A.P, T.S, ODISSA</strong>.
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
             <div className="grid grid-cols-2 gap-4 mb-9">
               {[
-                { label: "Mission", text: "Protecting human health, properties, and businesses using environmentally responsible solutions." },
-                { label: "Vision", text: "Innovation technology and safe chemicals." },
+                { label: "Mission", text: "Protecting human health, properties, and businesses using environmentally responsible solutions across A.P, T.S, ODISSA." },
+                { label: "Vision", text: "Innovation technology, waterproofing solutions, and safe certified chemicals." },
               ].map((item) => (
-                <div key={item.label} className="bg-[#F8FAFB] rounded-2xl p-5 border border-gray-100">
+                <div key={item.label} className="bg-[#F8FAFB] rounded-2xl p-5 border border-gray-100 shadow-sm">
                   <div className="text-[#18A558] font-bold text-sm mb-2" style={{ fontFamily: "Poppins, sans-serif" }}>{item.label}</div>
                   <p className="text-gray-500 text-sm leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>{item.text}</p>
                 </div>
               ))}
             </div>
             <button onClick={() => onNavigate("about")}
-              className="flex items-center gap-2 text-[#0C2D1C] font-semibold hover:text-[#18A558] transition-colors group"
+              className="flex items-center gap-2 text-[#0C2D1C] font-extrabold hover:text-[#18A558] transition-colors group"
               style={{ fontFamily: "Inter, sans-serif" }}>
               Read More About Us <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
             </button>
@@ -642,7 +667,7 @@ function WhyChooseSection() {
           <SectionTag>Our Advantage</SectionTag>
           <SectionHeading>Why Choose OME?</SectionHeading>
           <p className="text-gray-400 mt-4 max-w-lg mx-auto text-sm leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
-            Six pillars that define why OME is Andhra Pradesh's most recommended pest management authority.
+            Six pillars that define why OME is A.P, T.S, ODISSA's most recommended pest management and waterproofing authority.
           </p>
         </FadeIn>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -673,7 +698,7 @@ function ServicesOverview({ onNavigate }: { onNavigate: (p: string) => void }) {
           <SectionTag>What We Do</SectionTag>
           <SectionHeading>Our Services</SectionHeading>
           <p className="text-gray-400 mt-4 max-w-lg mx-auto text-sm leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
-            Comprehensive pest management solutions for every environment — from luxury residences to large-scale commercial facilities.
+            Comprehensive pest management and waterproofing solutions for every environment — across A.P, T.S, ODISSA.
           </p>
         </FadeIn>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -702,10 +727,10 @@ function ServicesOverview({ onNavigate }: { onNavigate: (p: string) => void }) {
 
 function TechnologySection() {
   return (
-    <section className="relative bg-[#0C2D1C] overflow-hidden">
+    <section className="relative bg-[#0C2D1C] overflow-hidden py-24">
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center">
         <FadeIn>
-          <div className="relative aspect-[4/3] rounded-3xl overflow-hidden bg-[#0d2540]">
+          <div className="relative aspect-[4/3] rounded-3xl overflow-hidden bg-[#0d2540] border border-white/10 shadow-2xl">
             <img src={technologyImg}
               alt="Modern luxury building" className="w-full h-full object-cover opacity-50" />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0C2D1C]/80 to-transparent" />
@@ -723,8 +748,8 @@ function TechnologySection() {
             </svg>
             <div className="absolute bottom-6 left-6 right-6">
               <div className="bg-white/8 backdrop-blur-md border border-white/10 rounded-2xl p-4">
-                <p className="text-white/60 text-xs" style={{ fontFamily: "Inter, sans-serif" }}>
-                  Hidden reticulation pipeline — zero surface damage, complete subsurface protection
+                <p className="text-white/80 text-xs font-semibold" style={{ fontFamily: "Inter, sans-serif" }}>
+                  Concealed technology system — zero surface damage, complete subsurface & waterproofing protection
                 </p>
               </div>
             </div>
@@ -732,13 +757,13 @@ function TechnologySection() {
         </FadeIn>
 
         <div>
-          <FadeIn delay={0.1}><SectionTag>Premium Technology</SectionTag><SectionHeading light>Advanced Reticulation Technology</SectionHeading></FadeIn>
+          <FadeIn delay={0.1}><SectionTag>Premium Technology</SectionTag><SectionHeading light>Advanced Technology</SectionHeading></FadeIn>
           <FadeIn delay={0.15}>
-            <p className="text-white/55 mt-5 mb-4 leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
+            <p className="text-white/70 mt-5 mb-4 leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
               Traditional pest control requires drilling holes into your premium flooring and tiles — permanently damaging the aesthetic of luxury homes and commercial spaces. We eliminated that compromise entirely.
             </p>
-            <p className="text-white/55 mb-9 leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
-              Our concealed reticulation system installs within structural layers, delivering precise termiticide treatment through hidden pipelines — not a single drill mark on your property.
+            <p className="text-white/70 mb-9 leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
+              Our concealed advanced technology system installs within structural layers, delivering precise treatment through hidden pipelines — not a single drill mark on your property.
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
@@ -746,7 +771,7 @@ function TechnologySection() {
               {[
                 { icon: "⚡", label: "No Drilling Required", desc: "Zero damage to luxury marble, tiles, or hardwood floors" },
                 { icon: "🌬️", label: "Completely Odourless", desc: "Safe for occupied spaces — no evacuation needed" },
-                { icon: "🛡️", label: "Long-term Protection", desc: "5–10 years of certified termite protection guaranteed" },
+                { icon: "🛡️", label: "Long-term Protection", desc: "5–10 years of certified protection & warranty guaranteed" },
                 { icon: "🏛️", label: "Luxury-Property Friendly", desc: "Designed for premium residences and high-end commercial buildings" },
                 { icon: "👨‍👩‍👧", label: "Safe for Families", desc: "CIB-approved chemicals, no risk to children or pets" },
               ].map((item) => (
@@ -1134,8 +1159,8 @@ function FinalCTA({ onNavigate }: { onNavigate: (p: string) => void }) {
             <Shield size={13} /> 100% Satisfaction Guaranteed
           </div>
           <SectionHeading light>Ready to Protect Your Property?</SectionHeading>
-          <p className="text-white/50 mt-4 mb-10 text-lg" style={{ fontFamily: "Inter, sans-serif" }}>
-            Join over 5,000 homes and 800 businesses that trust OME Pest Control Services across Andhra Pradesh and Telangana.
+          <p className="text-white/70 mt-4 mb-10 text-lg leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
+            Join over 5,000 homes and 800 businesses that trust <strong>OME PEST CONTROL SERVICES & WATER PROOFING SERVICES</strong> across <strong>A.P, T.S, ODISSA</strong>.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <button onClick={() => onNavigate("contact")}
@@ -1143,10 +1168,15 @@ function FinalCTA({ onNavigate }: { onNavigate: (p: string) => void }) {
               style={{ fontFamily: "Inter, sans-serif" }}>
               Book a Free Inspection <ArrowRight size={17} />
             </button>
-            <a href="tel:+919876543210"
-              className="flex items-center gap-2 bg-white/8 backdrop-blur-sm border border-white/15 text-white font-semibold px-9 py-4 rounded-full hover:bg-white/15 transition-all"
+            <a href="tel:+919492081706"
+              className="flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-semibold px-7 py-4 rounded-full hover:bg-white/20 transition-all"
               style={{ fontFamily: "Inter, sans-serif" }}>
-              <Phone size={17} /> Call an Expert
+              <Phone size={17} /> Call: 9492081706
+            </a>
+            <a href="tel:+919704246709"
+              className="flex items-center gap-2 bg-[#18A558] border border-[#18A558] text-white font-semibold px-7 py-4 rounded-full hover:bg-[#15934d] transition-all"
+              style={{ fontFamily: "Inter, sans-serif" }}>
+              <Phone size={17} /> Call: 9704246709
             </a>
           </div>
         </FadeIn>
@@ -1170,22 +1200,19 @@ function Footer({
         <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-12 mb-12">
           <div>
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-12 h-12 bg-white border-2 border-[#18A558] rounded-xl flex items-center justify-center p-1 overflow-hidden shadow-md">
+              <div className="w-12 h-12 bg-white border-2 border-[#18A558] rounded-xl flex items-center justify-center p-1 overflow-hidden shadow-md shrink-0">
                 <img src={logoImg} alt="OME Logo" className="w-full h-full object-contain" />
               </div>
-              <div className="text-left">
-                <div className="text-white font-extrabold text-xl leading-none tracking-wide flex items-center gap-1.5" style={{ fontFamily: "Poppins, sans-serif" }}>
-                  OME <span className="w-2 h-2 rounded-full bg-[#D2143A]" />
-                </div>
-                <div className="text-[#18A558] text-[10px] leading-none font-extrabold tracking-wider uppercase mt-0.5">Pest Control</div>
+              <div className="bg-white border-2 border-[#D2143A] text-[#D2143A] px-3 py-1.5 rounded-xl font-black text-xs uppercase tracking-wider shadow-md">
+                OME PEST CONTROL SERVICES & WATER PROOFING SERVICES
               </div>
             </div>
-            <p className="text-white/50 text-sm leading-relaxed mb-5" style={{ fontFamily: "Inter, sans-serif" }}>
-              {"Andhra Pradesh and Telangana's most trusted, government-licensed pest management company."}
+            <p className="text-white/60 text-xs leading-relaxed mb-5" style={{ fontFamily: "Inter, sans-serif" }}>
+              {"A.P, T.S, ODISSA's most trusted, government-licensed pest management & waterproofing company."}
             </p>
             <div className="flex flex-wrap gap-2 mb-6">
-              {["GST Reg.", "Gov. Licensed", "Certified"].map((b) => (
-                <span key={b} className="text-xs bg-white text-[#D2143A] font-bold px-3 py-1 rounded-full border border-red-200 shadow-sm">{b}</span>
+              {["Govt License", "NIPH Certified", "Food Safety Program", "A.P, T.S, ODISSA"].map((b) => (
+                <span key={b} className="text-[10px] bg-white text-[#D2143A] font-extrabold px-2.5 py-1 rounded-full border border-red-200 shadow-sm">{b}</span>
               ))}
             </div>
             {/* Social Media */}
@@ -1210,7 +1237,7 @@ function Footer({
               {NAV_LINKS.map((l) => (
                 <li key={l.page}>
                   <button onClick={() => onNavigate(l.page)}
-                    className="text-white/40 hover:text-[#18A558] transition-colors text-sm" style={{ fontFamily: "Inter, sans-serif" }}>
+                    className="text-white/50 hover:text-[#18A558] transition-colors text-sm" style={{ fontFamily: "Inter, sans-serif" }}>
                     {l.label}
                   </button>
                 </li>
@@ -1224,7 +1251,7 @@ function Footer({
               {SERVICES.slice(0, 5).map((s) => (
                 <li key={s.label}>
                   <button onClick={() => onNavigate("services")}
-                    className="text-white/40 hover:text-[#18A558] transition-colors text-sm" style={{ fontFamily: "Inter, sans-serif" }}>
+                    className="text-white/50 hover:text-[#18A558] transition-colors text-sm" style={{ fontFamily: "Inter, sans-serif" }}>
                     {s.label}
                   </button>
                 </li>
@@ -1235,24 +1262,29 @@ function Footer({
           <div>
             <h4 className="text-white font-bold mb-5 text-sm" style={{ fontFamily: "Poppins, sans-serif" }}>Contact Us</h4>
             <ul className="space-y-4">
-              {[
-                { icon: MapPin, text: "Srikakulam · Vizianagaram · Visakhapatnam, Andhra Pradesh & Telangana" },
-                { icon: Phone, text: "+91 98765 43210" },
-                { icon: Mail, text: "info@omepestcontrol.in" },
-                { icon: Clock, text: "Mon–Sat · 9:00 AM – 6:00 PM" },
-              ].map((item) => (
-                <li key={item.text} className="flex items-start gap-3">
-                  <item.icon size={15} className="text-[#18A558] mt-0.5 flex-shrink-0" />
-                  <span className="text-white/40 text-sm leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>{item.text}</span>
-                </li>
-              ))}
+              <li className="flex items-start gap-3">
+                <MapPin size={15} className="text-[#18A558] mt-0.5 flex-shrink-0" />
+                <span className="text-white/60 text-sm leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>Serving A.P, T.S, ODISSA</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <Phone size={15} className="text-[#18A558] mt-0.5 flex-shrink-0" />
+                <span className="text-white/60 text-sm leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>+91 9492081706 / +91 9704246709</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <Mail size={15} className="text-[#18A558] mt-0.5 flex-shrink-0" />
+                <span className="text-white/60 text-sm leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>omepestcontrol@gmail.com</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <Clock size={15} className="text-[#18A558] mt-0.5 flex-shrink-0" />
+                <span className="text-white/60 text-sm leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>Mon–Sat · 9:00 AM – 6:00 PM</span>
+              </li>
             </ul>
           </div>
         </div>
 
         <div className="border-t border-white/8 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-white/40 text-xs" style={{ fontFamily: "Inter, sans-serif" }}>
-            © 2024 OME Pest Control Services. All rights reserved. GST: 37XXXXX0000X1ZX
+          <p className="text-white/50 text-xs" style={{ fontFamily: "Inter, sans-serif" }}>
+            © 2024 OME PEST CONTROL SERVICES & WATER PROOFING SERVICES. All rights reserved.
           </p>
           <div className="flex items-center gap-5">
             {onReplayIntro && (
@@ -1277,11 +1309,11 @@ function Footer({
 function FloatingButtons({ onNavigate }: { onNavigate: (p: string) => void }) {
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
-      <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" title="WhatsApp"
+      <a href="https://wa.me/919492081706" target="_blank" rel="noopener noreferrer" title="WhatsApp"
         className="w-12 h-12 bg-[#25D366] rounded-full flex items-center justify-center shadow-2xl shadow-green-500/30 hover:scale-110 transition-transform">
         <MessageCircle size={21} className="text-white" />
       </a>
-      <a href="tel:+919876543210" title="Call Now"
+      <a href="tel:+919492081706" title="Call Now"
         className="w-12 h-12 bg-[#18A558] rounded-full flex items-center justify-center shadow-2xl shadow-[#18A558]/30 hover:scale-110 transition-transform">
         <Phone size={19} className="text-white" />
       </a>
@@ -1975,11 +2007,11 @@ function ContactPage() {
                 <h3 className="font-extrabold text-xl mb-6" style={{ fontFamily: "Poppins, sans-serif" }}>Contact Information</h3>
                 <div className="space-y-5">
                   {[
-                    { icon: MapPin, label: "Address", value: "Andhra Pradesh & Telangana State-wide Networks" },
-                    { icon: Phone, label: "Phone", value: "+91 98765 43210" },
-                    { icon: Mail, label: "Email", value: "info@omepestcontrol.in" },
+                    { icon: MapPin, label: "Address", value: "A.P, T.S, ODISSA State-wide Networks" },
+                    { icon: Phone, label: "Primary Phone", value: "+91 94920 81706" },
+                    { icon: Phone, label: "Secondary Phone", value: "+91 97042 46709" },
+                    { icon: Mail, label: "Email", value: "omepestcontrol@gmail.com" },
                     { icon: Clock, label: "Business Hours", value: "Monday – Saturday · 9:00 AM – 6:00 PM" },
-                    { icon: Phone, label: "Emergency Line", value: "+91 98765 43211 (24 / 7)" },
                   ].map((item) => (
                     <div key={item.label} className="flex items-start gap-4">
                       <div className="w-9 h-9 bg-white/8 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -1987,23 +2019,27 @@ function ContactPage() {
                       </div>
                       <div>
                         <div className="text-white/40 text-xs uppercase tracking-wide mb-0.5" style={{ fontFamily: "Inter, sans-serif" }}>{item.label}</div>
-                        <div className="text-white/85 text-sm" style={{ fontFamily: "Inter, sans-serif" }}>{item.value}</div>
+                        <div className="text-white/85 text-sm font-semibold" style={{ fontFamily: "Inter, sans-serif" }}>{item.value}</div>
                       </div>
                     </div>
                   ))}
                 </div>
-                <div className="mt-7 pt-6 border-t border-white/10 flex gap-3">
-                  <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer"
-                    className="flex-1 flex items-center justify-center gap-2 bg-[#25D366] text-white font-semibold py-3 rounded-xl text-sm hover:brightness-110 transition-all">
+                <div className="mt-7 pt-6 border-t border-white/10 flex flex-wrap gap-3">
+                  <a href="https://wa.me/919492081706" target="_blank" rel="noopener noreferrer"
+                    className="flex-1 flex items-center justify-center gap-2 bg-[#25D366] text-white font-semibold py-3 rounded-xl text-sm hover:brightness-110 transition-all min-w-[120px]">
                     <MessageCircle size={15} /> WhatsApp
                   </a>
-                  <a href="tel:+919876543210"
-                    className="flex-1 flex items-center justify-center gap-2 bg-[#18A558] text-white font-semibold py-3 rounded-xl text-sm hover:bg-[#15934d] transition-all">
-                    <Phone size={15} /> Call Now
+                  <a href="tel:+919492081706"
+                    className="flex-1 flex items-center justify-center gap-2 bg-[#18A558] text-white font-semibold py-3 rounded-xl text-sm hover:bg-[#15934d] transition-all min-w-[120px]">
+                    <Phone size={15} /> 9492081706
                   </a>
-                  <a href="mailto:info@omepestcontrol.in"
-                    className="flex-1 flex items-center justify-center gap-2 bg-white/10 text-white font-semibold py-3 rounded-xl text-sm hover:bg-white/20 transition-all">
-                    <Mail size={15} /> Email
+                  <a href="tel:+919704246709"
+                    className="flex-1 flex items-center justify-center gap-2 bg-[#D2143A] text-white font-semibold py-3 rounded-xl text-sm hover:bg-[#b00f2e] transition-all min-w-[120px]">
+                    <Phone size={15} /> 9704246709
+                  </a>
+                  <a href="mailto:omepestcontrol@gmail.com"
+                    className="flex-1 flex items-center justify-center gap-2 bg-white/10 text-white font-semibold py-3 rounded-xl text-sm hover:bg-white/20 transition-all min-w-[120px]">
+                    <Mail size={15} /> Email Us
                   </a>
                 </div>
               </div>
