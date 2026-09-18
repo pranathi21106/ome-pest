@@ -363,7 +363,7 @@ function SectionHeading({ children, light = false }: { children: React.ReactNode
 
 function PageHero({ title, subtitle, page }: { title: string; subtitle: string; page: string }) {
   return (
-    <section className="relative bg-[#0C2D1C] pt-36 pb-24 overflow-hidden">
+    <section className="relative bg-[#0C2D1C] pt-48 md:pt-56 pb-24 overflow-hidden">
       <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "radial-gradient(ellipse at 70% 50%, #18A558 0%, transparent 60%)" }} />
       <div className="absolute inset-0 opacity-5"
         style={{ backgroundImage: "linear-gradient(#18A558 1px, transparent 1px), linear-gradient(90deg, #18A558 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
@@ -393,62 +393,98 @@ function Nav({
 }) {
   const scrolled = useScrolled();
   const [menuOpen, setMenuOpen] = useState(false);
+
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled || currentPage !== "home" ? "bg-[#0C2D1C] shadow-2xl py-3" : "bg-gradient-to-b from-[#0C2D1C]/95 via-[#0C2D1C]/80 to-transparent py-3 md:py-4"}`}>
-      <div className="max-w-7xl mx-auto px-4 md:px-6 flex flex-col lg:flex-row items-center justify-between gap-3">
-        {/* Logo & Highlighted Capital Title Container */}
-        <button onClick={() => onNavigate("home")} className="flex items-center gap-2.5 md:gap-3 group text-left">
-          <div className="w-10 h-10 md:w-12 md:h-12 bg-white border-2 border-[#18A558] rounded-xl flex items-center justify-center p-1 overflow-hidden shadow-xl group-hover:scale-105 transition-transform shrink-0">
-            <img src={logoImg} alt="OME Logo" className="w-full h-full object-contain" />
-          </div>
-          {/* Highlighted Big Red & White Badge Title - 100% visible without text cut-off */}
-          <div className="bg-white border-2 border-[#D2143A] text-[#D2143A] px-3.5 py-1.5 md:px-5 md:py-2 rounded-2xl shadow-xl font-black text-xs sm:text-sm md:text-sm lg:text-base uppercase tracking-wider flex items-center">
-            <span className="font-black tracking-wider leading-tight text-left">
-              OME PEST CONTROL SERVICES & WATER PROOFING SERVICES
-            </span>
-          </div>
-        </button>
+    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-500 shadow-2xl">
+      {/* Top Navigation Bar: Big Logo + Navigation Links */}
+      <div className={`transition-all duration-500 ${scrolled || currentPage !== "home" ? "bg-[#0C2D1C] py-2.5 md:py-3 border-b border-white/10" : "bg-[#0C2D1C]/95 backdrop-blur-md py-3 border-b border-white/10"}`}>
+        <div className="max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between gap-4">
+          
+          {/* BIG Logo Container */}
+          <button 
+            onClick={() => onNavigate("home")} 
+            className="flex items-center gap-3.5 group text-left transition-transform hover:scale-102"
+          >
+            <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 bg-white border-3 border-[#18A558] rounded-2xl flex items-center justify-center p-1.5 overflow-hidden shadow-2xl group-hover:border-[#D2143A] transition-all duration-300 shrink-0 relative">
+              <img src={logoImg} alt="OME Logo" className="w-full h-full object-contain" />
+              <div className="absolute -bottom-0.5 -right-0.5 bg-[#D2143A] text-white text-[9px] font-black px-1.5 py-0.5 rounded-tl-lg shadow">
+                #1
+              </div>
+            </div>
+            
+            {/* Sub-tagline / Badge next to Big Logo */}
+            <div className="hidden sm:flex flex-col">
+              <span className="text-white font-black text-sm md:text-base tracking-wide flex items-center gap-1.5">
+                <BadgeCheck size={16} className="text-[#18A558]" /> OME Pest & Waterproofing
+              </span>
+              <span className="text-white/80 text-xs font-bold tracking-wider uppercase">
+                Govt Licensed · Rank #1 Leader
+              </span>
+            </div>
+          </button>
 
-        {/* Navigation Links and Buttons */}
-        <div className="flex items-center gap-4 md:gap-6 flex-wrap justify-center">
-          <div className="hidden lg:flex items-center gap-6">
-            {NAV_LINKS.map((link) => (
-              <button key={link.page} onClick={() => onNavigate(link.page)}
-                className={`text-sm font-bold uppercase tracking-wider transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-[#18A558] after:transition-all after:duration-300 ${
-                  currentPage === link.page ? "text-[#18A558] after:w-full font-black" : "text-white/90 hover:text-white after:w-0 hover:after:w-full"
-                }`} style={{ fontFamily: "Inter, sans-serif" }}>
-                {link.label}
-              </button>
-            ))}
-          </div>
+          {/* Navigation Links and Action Buttons */}
+          <div className="flex items-center gap-4 md:gap-6">
+            <div className="hidden lg:flex items-center gap-6">
+              {NAV_LINKS.map((link) => (
+                <button
+                  key={link.page}
+                  onClick={() => onNavigate(link.page)}
+                  className={`text-sm font-bold uppercase tracking-wider transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-[#18A558] after:transition-all after:duration-300 ${
+                    currentPage === link.page ? "text-[#18A558] after:w-full font-black" : "text-white/90 hover:text-white after:w-0 hover:after:w-full"
+                  }`}
+                  style={{ fontFamily: "Inter, sans-serif" }}
+                >
+                  {link.label}
+                </button>
+              ))}
+            </div>
 
-          <div className="flex items-center gap-2 md:gap-3">
-            {onReplayIntro && (
+            <div className="flex items-center gap-2 md:gap-3">
+              {onReplayIntro && (
+                <button
+                  onClick={onReplayIntro}
+                  title="Replay Logo Intro Animation"
+                  className="hidden xl:flex items-center gap-1.5 bg-white text-[#D2143A] hover:bg-[#D2143A] hover:text-white border-2 border-[#D2143A] text-xs font-black px-3.5 py-2 rounded-full shadow-md transition-all hover:scale-105 cursor-pointer uppercase tracking-wider"
+                  style={{ fontFamily: "Inter, sans-serif" }}
+                >
+                  <RefreshCw size={13} className="animate-spin-slow" /> Replay Intro
+                </button>
+              )}
+
               <button
-                onClick={onReplayIntro}
-                title="Replay Logo Intro Animation"
-                className="hidden xl:flex items-center gap-1.5 bg-white text-[#D2143A] hover:bg-[#D2143A] hover:text-white border-2 border-[#D2143A] text-xs font-black px-3.5 py-2 rounded-full shadow-md transition-all hover:scale-105 cursor-pointer uppercase tracking-wider"
-                style={{ fontFamily: "Inter, sans-serif" }}
+                onClick={() => onNavigate("contact")}
+                className="hidden sm:flex items-center gap-2 bg-[#D2143A] text-white text-xs md:text-sm font-black px-4 py-2.5 rounded-full hover:bg-[#b00f2e] transition-all hover:shadow-lg hover:shadow-[#D2143A]/30 uppercase tracking-wider"
               >
-                <RefreshCw size={13} className="animate-spin-slow" /> Replay Intro
+                <Phone size={13} /> Book Inspection
               </button>
-            )}
-
-            <button onClick={() => onNavigate("contact")}
-              className="hidden md:flex items-center gap-2 bg-[#D2143A] text-white text-xs md:text-sm font-black px-4 py-2.5 rounded-full hover:bg-[#b00f2e] transition-all hover:shadow-lg hover:shadow-[#D2143A]/30 uppercase tracking-wider">
-              <Phone size={13} /> Book Inspection
-            </button>
-            <button onClick={() => setMenuOpen(!menuOpen)} className="lg:hidden text-white p-2 bg-white/10 rounded-lg">
-              {menuOpen ? <X size={22} /> : <Menu size={22} />}
-            </button>
+              <button onClick={() => setMenuOpen(!menuOpen)} className="lg:hidden text-white p-2.5 bg-white/10 rounded-xl hover:bg-white/20 transition-colors">
+                {menuOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </div>
           </div>
         </div>
       </div>
 
+      {/* Dedicated Title Bar directly UNDER the Navigation Bar */}
+      <div className="bg-gradient-to-r from-[#0C2D1C] via-[#0f3d26] to-[#0C2D1C] border-b-2 border-[#D2143A] py-2 md:py-2.5 px-4 shadow-lg">
+        <div className="max-w-7xl mx-auto flex items-center justify-center text-center">
+          <button
+            onClick={() => onNavigate("home")}
+            className="inline-block bg-white border-2 border-[#D2143A] text-[#D2143A] px-4 py-1.5 sm:px-6 sm:py-2 rounded-2xl shadow-xl font-black text-xs sm:text-sm md:text-base lg:text-lg uppercase tracking-wider hover:bg-red-50 transition-colors"
+          >
+            <span className="font-black tracking-wider leading-tight">
+              OME PEST CONTROL SERVICES & WATER PROOFING SERVICES
+            </span>
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Drawer Menu */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-[#0C2D1C] border-t border-white/10 overflow-hidden">
+            className="lg:hidden bg-[#0C2D1C] border-t border-white/10 overflow-hidden shadow-2xl">
             <div className="px-6 py-5 flex flex-col gap-4">
               {NAV_LINKS.map((link) => (
                 <button key={link.page} onClick={() => { onNavigate(link.page); setMenuOpen(false); }}
@@ -468,14 +504,14 @@ function Nav({
                 </button>
               )}
               <button onClick={() => { onNavigate("contact"); setMenuOpen(false); }}
-                className="bg-[#D2143A] text-white font-extrabold px-5 py-3 rounded-full text-sm hover:bg-[#b00f2e] uppercase tracking-wider">
-                Book Free Inspection
+                className="bg-[#D2143A] text-white font-extrabold px-5 py-3 rounded-full text-sm hover:bg-[#b00f2e] uppercase tracking-wider flex items-center justify-center gap-2">
+                <Phone size={15} /> Book Free Inspection
               </button>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </header>
   );
 }
 
@@ -483,7 +519,7 @@ function Nav({
 
 function HeroSection({ onNavigate }: { onNavigate: (p: string) => void }) {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-[#0C2D1C] pt-28 md:pt-36">
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-[#0C2D1C] pt-48 md:pt-56 pb-16">
       <div className="absolute inset-0">
         <img src={heroBgImg}
           alt="Modern protected building" className="w-full h-full object-cover opacity-20" />
@@ -723,70 +759,519 @@ function ServicesOverview({ onNavigate }: { onNavigate: (p: string) => void }) {
   );
 }
 
-// ─── Technology Section ─────────────────────────────────────────────────────────
+// ─── Categorized Advanced Technology Section ────────────────────────────────────
+
+interface TechServiceItem {
+  id: string;
+  title: string;
+  equipment: string;
+  desc: string;
+  features: string[];
+  applications: string;
+  warranty: string;
+  icon: any;
+  badge: string;
+}
+
+interface TechCategory {
+  id: string;
+  label: string;
+  subtitle: string;
+  icon: any;
+  color: string;
+  items: TechServiceItem[];
+}
+
+const TECH_CATEGORIES: TechCategory[] = [
+  {
+    id: "termite",
+    label: "Termite & Subsurface Tech",
+    subtitle: "Concealed Reticulation & Ultrasonic Detection",
+    icon: Shield,
+    color: "#18A558",
+    items: [
+      {
+        id: "reticulation",
+        title: "No-Drill Pipe Reticulation System",
+        equipment: "Subfloor Concealed HDPE Pressure Network",
+        desc: "A subterranean piping network installed under foundations and walls. Allows periodic re-injection of liquid termiticides without drilling holes into luxury marble, granite, or hardwood floors.",
+        features: [
+          "Zero surface drilling or tile damage",
+          "Concealed 20+ year piping network",
+          "Odourless sub-slab distribution",
+          "Periodic recharge from external junction ports"
+        ],
+        applications: "Luxury Villas, New Residential & Commercial Constructions",
+        warranty: "10-Year Protection Guarantee",
+        icon: Zap,
+        badge: "No Drilling Required",
+      },
+      {
+        id: "ultrasonic",
+        title: "Acoustic & Thermal Subsurface Diagnostics",
+        equipment: "Infrared Thermal Imaging & Acoustic Sensors",
+        desc: "Non-destructive scanning equipment detects hidden termite activity, thermal anomalies, and subterranean movement behind solid concrete and wooden walls.",
+        features: [
+          "Non-invasive wall scanning",
+          "Pinpoint colony localization",
+          "Instant digital heat maps",
+          "Early prevention before structural damage"
+        ],
+        applications: "Heritage Buildings, Commercial Properties, Luxury Homes",
+        warranty: "Diagnostic Accuracy Certified",
+        icon: Target,
+        badge: "Precision Diagnostics",
+      },
+      {
+        id: "matrix_baiting",
+        title: "Subterranean Bait Matrix Eradication",
+        equipment: "Chitin Synthesis Inhibitor Bait Stations",
+        desc: "Eco-targeted bait matrix stations that worker termites carry back to the central queen, eliminating the entire colony at its source without chemical spraying.",
+        features: [
+          "Colony-wide elimination",
+          "Pet & child friendly",
+          "Continuous perimeter protection",
+          "Zero indoor chemical exposure"
+        ],
+        applications: "Residential Gardens, Educational Institutions, Hospitals",
+        warranty: "Total Colony Elimination",
+        icon: Bug,
+        badge: "Eco-Friendly Matrix",
+      },
+    ],
+  },
+  {
+    id: "waterproofing",
+    label: "Waterproofing & Seepage Tech",
+    subtitle: "Polyurethane Grout & Elastomeric Protection",
+    icon: Droplets,
+    color: "#0284c7",
+    items: [
+      {
+        id: "grout_injection",
+        title: "High-Pressure Polyurethane Grout Injection",
+        equipment: "High-Pressure PU Injection Pumps & Mechanical Packers",
+        desc: "Hydrophobic polyurethane resin injected deep into concrete cracks under 3000+ PSI pressure. Reacts with water to expand 30x and permanently seal active water leaks.",
+        features: [
+          "Stops active running water leaks instantly",
+          "30x expanding hydrophobic foam",
+          "Seals structural micro-cracks permanently",
+          "Ideal for high-moisture subterranean zones"
+        ],
+        applications: "Basements, Lift Pits, Retaining Walls, Water Tanks",
+        warranty: "10-Year Water-Lock Warranty",
+        icon: Sparkles,
+        badge: "Active Leak Stopping",
+      },
+      {
+        id: "elastomeric",
+        title: "Elastomeric Polymer Liquid Membrane",
+        equipment: "UV-Resistant Polyurethane & Acrylic Polymers",
+        desc: "High-elasticity liquid membrane system forming a seamless, joint-free rubberized shield over roofs and terraces with 400% elongation flexibility.",
+        features: [
+          "Seamless joint-free barrier",
+          "400% crack-bridging elasticity",
+          "UV & solar reflective heat barrier",
+          "Weather & standing water resistant"
+        ],
+        applications: "Terraces, Balconies, Sunken Slabs, Exterior Walls",
+        warranty: "7–10 Year Weather Shield",
+        icon: Shield,
+        badge: "400% Elastic Shield",
+      },
+      {
+        id: "seepage_radar",
+        title: "Pinless Seepage & Moisture Diagnostics",
+        equipment: "Digital Radio-Frequency Moisture Scanners",
+        desc: "Advanced non-destructive moisture radar pinpoints hidden water leaks and wall dampness depth without chipping tiles or plaster.",
+        features: [
+          "Detects moisture up to 40mm depth",
+          "Identifies hidden pipe leaks",
+          "Zero damage to bathroom tiles",
+          "Clear moisture percentage reporting"
+        ],
+        applications: "Bathrooms, Kitchen Walls, Ceiling Seepage Audit",
+        warranty: "Non-Destructive Diagnostic",
+        icon: Eye,
+        badge: "Zero Wall Damage",
+      },
+    ],
+  },
+  {
+    id: "commercial",
+    label: "Commercial & Pharma Hygiene Tech",
+    subtitle: "ULV Cold Fogging & IoT Rodent Sensors",
+    icon: Building2,
+    color: "#d97706",
+    items: [
+      {
+        id: "ulv_fogging",
+        title: "ULV Ultra-Low Volume Cold Fogging",
+        equipment: "Sub-Micron ULV Electric Cold Foggers",
+        desc: "Engineered aerosol cold fogging breaking disinfectants into 5-15 micron droplets that stay suspended in air, penetrating 100% of hard-to-reach commercial areas.",
+        features: [
+          "Sub-micron droplet dispersion",
+          "Reaches 100% hidden crevices",
+          "Zero wet residue on electronics",
+          "CIB & WHO approved formulations"
+        ],
+        applications: "Pharma Cleanrooms, Hospitals, Food Processing Units, IT Parks",
+        warranty: "Hospital-Grade Hygiene",
+        icon: Wind,
+        badge: "Pharma Grade Mist",
+      },
+      {
+        id: "iot_rodent",
+        title: "IoT Digital Sensor Rodent Monitoring",
+        equipment: "Smart Wireless Sensor Traps & Cloud Dashboard",
+        desc: "24/7 automated sensor grid detecting rodent activity in commercial facilities, sending instant alerts to management for zero-pest audit compliance.",
+        features: [
+          "24/7 digital surveillance",
+          "Instant SMS/Email alerts",
+          "Audit-ready compliance reports",
+          "100% non-toxic capture protocol"
+        ],
+        applications: "Pharma Warehouses, Rice Mills, Supermarkets, Hotels",
+        warranty: "Audit-Ready Compliance",
+        icon: Target,
+        badge: "Smart Sensor Network",
+      },
+      {
+        id: "uv_insect",
+        title: "HACCP UV-A Dynamic Insect Trap System",
+        equipment: "Shatterproof UV-A LED Insect Attractants",
+        desc: "HACCP-compliant glue-board fly catchers using specific 365nm UV light wavelengths to attract and quietly trap flying insects without electric zapping sound or fragmentation.",
+        features: [
+          "Zero insect fragmentation",
+          "Silent hygienic glue board capture",
+          "FDA & HACCP compliant",
+          "Shatterproof UV LED lamps"
+        ],
+        applications: "Commercial Kitchens, Food Packaging Lines, Dining Halls",
+        warranty: "Food Safety Approved",
+        icon: Zap,
+        badge: "HACCP Compliant",
+      },
+    ],
+  },
+  {
+    id: "residential",
+    label: "Residential & Eco Eradication Tech",
+    subtitle: "Odourless Gel Baiting & Thermal Heat Steam",
+    icon: Home,
+    color: "#e11d48",
+    items: [
+      {
+        id: "gel_baiting",
+        title: "Targeted Odourless Gel-Bait Matrix",
+        equipment: "Envu & FMC Cascade Gel Formulations",
+        desc: "Micro-encapsulated gel bait applied in tiny dots inside kitchen cabinets and electrical appliances. Cockroaches consume and spread it throughout harborage nests.",
+        features: [
+          "No need to empty kitchen cabinets",
+          "100% odourless & stain-free",
+          "Safe around food & utensils",
+          "Sustained 6-month domino elimination"
+        ],
+        applications: "Residential Kitchens, Modular Cabinets, Electronics",
+        warranty: "6-Month Protection Guarantee",
+        icon: FlaskConical,
+        badge: "Odourless & No-Move",
+      },
+      {
+        id: "heat_steam",
+        title: "Thermal Heat Bed Bug Eradication",
+        equipment: "Superheated Dry Steam Generators (180°C)",
+        desc: "High-temperature dry steam penetrates deep mattress seams, carpet backing, and headboards, instantly destroying bed bugs and their eggs without harsh chemicals.",
+        features: [
+          "100% chemical-free thermal kill",
+          "Instantly destroys eggs & adults",
+          "Deep fabric & seam penetration",
+          "Immediate room re-entry"
+        ],
+        applications: "Hotel Bedrooms, Luxury Mattresses, Upholstery",
+        warranty: "Complete Egg & Bug Kill",
+        icon: Zap,
+        badge: "100% Chemical-Free",
+      },
+      {
+        id: "bird_deterrent",
+        title: "Sonic & Optical Bird Deterrent Array",
+        equipment: "High-Tensile Polycarbonate Spikes & Netting",
+        desc: "Humane bird exclusion netting and optical gel discs preventing pigeons and birds from roosting on ledges without causing harm to birds.",
+        features: [
+          "100% humane bird exclusion",
+          "UV-stabilized transparent netting",
+          "Zero facade visual distraction",
+          "Prevents corrosive droppings"
+        ],
+        applications: "Residential Balconies, Building Facades, AC Units",
+        warranty: "5-Year Netting Warranty",
+        icon: Wind,
+        badge: "Humane Exclusion",
+      },
+    ],
+  },
+];
 
 function TechnologySection() {
+  const [activeCategory, setActiveCategory] = useState<string>("termite");
+  const [selectedTech, setSelectedTech] = useState<TechServiceItem | null>(null);
+
+  const currentCategory = TECH_CATEGORIES.find((cat) => cat.id === activeCategory) || TECH_CATEGORIES[0];
+
   return (
-    <section className="relative bg-[#0C2D1C] overflow-hidden py-24">
-      <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center">
-        <FadeIn>
-          <div className="relative aspect-[4/3] rounded-3xl overflow-hidden bg-[#0d2540] border border-white/10 shadow-2xl">
-            <img src={technologyImg}
-              alt="Modern luxury building" className="w-full h-full object-cover opacity-50" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0C2D1C]/80 to-transparent" />
-            <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-              <g opacity="0.65">
-                <line x1="0" y1="260" x2="400" y2="260" stroke="#18A558" strokeWidth="2" strokeDasharray="10 5" />
-                {[60, 160, 260, 360].map((x, i) => (
-                  <g key={x}>
-                    <line x1={x} y1="260" x2={x} y2={[200, 175, 190, 205][i]} stroke="#18A558" strokeWidth="1.5" strokeDasharray="6 4" />
-                    <circle cx={x} cy={[200, 175, 190, 205][i]} r="5" fill="#18A558" opacity="0.9" />
-                    <circle cx={x} cy={[200, 175, 190, 205][i]} r="12" fill="none" stroke="#18A558" strokeWidth="1" opacity="0.3" />
-                  </g>
-                ))}
-              </g>
-            </svg>
-            <div className="absolute bottom-6 left-6 right-6">
-              <div className="bg-white/8 backdrop-blur-md border border-white/10 rounded-2xl p-4">
-                <p className="text-white/80 text-xs font-semibold" style={{ fontFamily: "Inter, sans-serif" }}>
-                  Concealed technology system — zero surface damage, complete subsurface & waterproofing protection
-                </p>
+    <section className="relative bg-[#0C2D1C] overflow-hidden py-24 md:py-28">
+      {/* Dynamic Grid Overlay */}
+      <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "radial-gradient(ellipse at 50% 30%, #18A558 0%, transparent 70%)" }} />
+      <div className="absolute inset-0 opacity-5" style={{ backgroundImage: "linear-gradient(#18A558 1px, transparent 1px), linear-gradient(90deg, #18A558 1px, transparent 1px)", backgroundSize: "50px 50px" }} />
+
+      <div className="relative max-w-7xl mx-auto px-6">
+        {/* Section Header */}
+        <FadeIn className="text-center mb-14">
+          <SectionTag light>Categorized Service Innovations</SectionTag>
+          <SectionHeading light>Advanced Technology Services</SectionHeading>
+          <p className="text-white/70 mt-4 max-w-2xl mx-auto text-base leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
+            We have categorized our advanced technology solutions into specialized services — engineered to deliver 100% damage-free, odourless, and government-certified protection for every environment.
+          </p>
+        </FadeIn>
+
+        {/* Category Tabs Bar */}
+        <FadeIn delay={0.1} className="mb-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 bg-white/5 border border-white/10 p-2 rounded-2xl backdrop-blur-md">
+            {TECH_CATEGORIES.map((category) => {
+              const CategoryIcon = category.icon;
+              const isActive = activeCategory === category.id;
+              return (
+                <button
+                  key={category.id}
+                  onClick={() => setActiveCategory(category.id)}
+                  className={`flex flex-col items-center justify-center p-4 rounded-xl transition-all duration-300 text-center ${
+                    isActive
+                      ? "bg-white text-[#0C2D1C] shadow-2xl scale-[1.02]"
+                      : "bg-transparent text-white/70 hover:bg-white/10 hover:text-white"
+                  }`}
+                >
+                  <div
+                    className={`w-11 h-11 rounded-xl flex items-center justify-center mb-2 transition-colors ${
+                      isActive ? "bg-[#18A558] text-white" : "bg-white/10 text-[#18A558]"
+                    }`}
+                  >
+                    <CategoryIcon size={20} />
+                  </div>
+                  <span className="font-extrabold text-xs md:text-sm tracking-wide leading-tight mb-0.5" style={{ fontFamily: "Poppins, sans-serif" }}>
+                    {category.label}
+                  </span>
+                  <span className={`text-[10px] font-medium hidden sm:inline-block ${isActive ? "text-gray-600" : "text-white/50"}`}>
+                    {category.items.length} Tech Services
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </FadeIn>
+
+        {/* Selected Category Header Banner */}
+        <FadeIn delay={0.15} className="mb-8">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-white/8 border border-white/15 rounded-2xl p-6 backdrop-blur-md gap-4">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xl bg-[#18A558] text-white flex items-center justify-center shadow-lg shrink-0">
+                <currentCategory.icon size={24} />
               </div>
+              <div>
+                <h3 className="text-white font-extrabold text-xl" style={{ fontFamily: "Poppins, sans-serif" }}>
+                  {currentCategory.label}
+                </h3>
+                <p className="text-white/70 text-xs sm:text-sm font-medium">{currentCategory.subtitle}</p>
+              </div>
+            </div>
+            <div className="bg-[#18A558]/20 border border-[#18A558]/50 text-[#18A558] text-xs font-black px-4 py-2 rounded-full uppercase tracking-wider">
+              {currentCategory.items.length} Certified Systems
             </div>
           </div>
         </FadeIn>
 
-        <div>
-          <FadeIn delay={0.1}><SectionTag>Premium Technology</SectionTag><SectionHeading light>Advanced Technology</SectionHeading></FadeIn>
-          <FadeIn delay={0.15}>
-            <p className="text-white/70 mt-5 mb-4 leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
-              Traditional pest control requires drilling holes into your premium flooring and tiles — permanently damaging the aesthetic of luxury homes and commercial spaces. We eliminated that compromise entirely.
-            </p>
-            <p className="text-white/70 mb-9 leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
-              Our concealed advanced technology system installs within structural layers, delivering precise treatment through hidden pipelines — not a single drill mark on your property.
-            </p>
-          </FadeIn>
-          <FadeIn delay={0.2}>
-            <div className="space-y-3">
-              {[
-                { icon: "⚡", label: "No Drilling Required", desc: "Zero damage to luxury marble, tiles, or hardwood floors" },
-                { icon: "🌬️", label: "Completely Odourless", desc: "Safe for occupied spaces — no evacuation needed" },
-                { icon: "🛡️", label: "Long-term Protection", desc: "5–10 years of certified protection & warranty guaranteed" },
-                { icon: "🏛️", label: "Luxury-Property Friendly", desc: "Designed for premium residences and high-end commercial buildings" },
-                { icon: "👨‍👩‍👧", label: "Safe for Families", desc: "CIB-approved chemicals, no risk to children or pets" },
-              ].map((item) => (
-                <div key={item.label} className="flex items-start gap-4 bg-white/4 rounded-2xl p-4 border border-white/8 hover:border-[#18A558]/40 transition-colors">
-                  <span className="text-xl flex-shrink-0 mt-0.5">{item.icon}</span>
+        {/* Tech Services Grid */}
+        <div className="grid md:grid-cols-3 gap-6 mb-16">
+          {currentCategory.items.map((tech, idx) => {
+            const TechIcon = tech.icon;
+            return (
+              <FadeIn key={tech.id} delay={idx * 0.08}>
+                <div
+                  className="bg-white/6 border border-white/12 rounded-3xl p-6 hover:bg-white/10 hover:border-[#18A558]/50 transition-all duration-300 flex flex-col justify-between h-full group"
+                >
                   <div>
-                    <div className="text-white font-semibold text-sm mb-0.5" style={{ fontFamily: "Poppins, sans-serif" }}>{item.label}</div>
-                    <div className="text-white/40 text-xs" style={{ fontFamily: "Inter, sans-serif" }}>{item.desc}</div>
+                    {/* Badge & Icon */}
+                    <div className="flex items-center justify-between mb-5">
+                      <span className="bg-[#D2143A] text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider shadow-md">
+                        {tech.badge}
+                      </span>
+                      <div className="w-10 h-10 rounded-xl bg-white/10 group-hover:bg-[#18A558] text-[#18A558] group-hover:text-white flex items-center justify-center transition-colors">
+                        <TechIcon size={18} />
+                      </div>
+                    </div>
+
+                    {/* Title & Equipment */}
+                    <h4 className="text-white font-extrabold text-lg mb-2 leading-snug" style={{ fontFamily: "Poppins, sans-serif" }}>
+                      {tech.title}
+                    </h4>
+                    <p className="text-[#18A558] text-xs font-semibold mb-3 flex items-center gap-1">
+                      <BadgeCheck size={14} /> Equipment: {tech.equipment}
+                    </p>
+
+                    <p className="text-white/70 text-xs leading-relaxed mb-5" style={{ fontFamily: "Inter, sans-serif" }}>
+                      {tech.desc}
+                    </p>
+
+                    {/* Features checklist */}
+                    <div className="space-y-2 mb-6 border-t border-white/10 pt-4">
+                      {tech.features.map((feat) => (
+                        <div key={feat} className="flex items-start gap-2 text-white/90 text-xs font-medium">
+                          <CheckCircle2 size={13} className="text-[#18A558] shrink-0 mt-0.5" />
+                          <span>{feat}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="border-t border-white/10 pt-4 mt-auto">
+                    <div className="flex items-center justify-between text-xs text-white/60 mb-3">
+                      <span>Warranty: <strong className="text-white">{tech.warranty}</strong></span>
+                    </div>
+                    <button
+                      onClick={() => setSelectedTech(tech)}
+                      className="w-full bg-white text-[#0C2D1C] hover:bg-[#18A558] hover:text-white font-extrabold py-2.5 rounded-xl transition-all text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md"
+                    >
+                      View Specifications <ChevronRight size={14} />
+                    </button>
                   </div>
                 </div>
-              ))}
-            </div>
-          </FadeIn>
+              </FadeIn>
+            );
+          })}
         </div>
+
+        {/* Visual Technology Comparison Banner */}
+        <FadeIn delay={0.3}>
+          <div className="bg-gradient-to-r from-[#0d2e1e] via-[#10432c] to-[#0d2e1e] border-2 border-[#18A558]/40 rounded-3xl p-8 shadow-2xl">
+            <div className="grid lg:grid-cols-12 gap-8 items-center">
+              <div className="lg:col-span-8">
+                <div className="inline-flex items-center gap-2 bg-[#D2143A] text-white text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-3">
+                  <Shield size={14} /> Traditional vs OME Advanced Technology
+                </div>
+                <h3 className="text-white font-extrabold text-2xl mb-3" style={{ fontFamily: "Poppins, sans-serif" }}>
+                  Why OME Categorized Technology Outperforms Traditional Methods
+                </h3>
+                <p className="text-white/80 text-sm leading-relaxed mb-6 font-medium">
+                  Traditional pest control relies on aggressive floor drilling, messy odor sprays, and temporary surface treatments. OME's specialized service technology uses subsurface concealed reticulation, high-pressure PU grout injection, and IoT digital sensors to eliminate pests permanently with zero property damage.
+                </p>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div className="bg-red-950/40 border border-red-500/30 rounded-2xl p-4">
+                    <span className="text-red-400 font-extrabold text-xs uppercase tracking-wider block mb-1">❌ Traditional Methods</span>
+                    <p className="text-white/70 text-xs">Floor drilling damage, strong chemical odor, frequent re-infestation, high long-term maintenance cost.</p>
+                  </div>
+                  <div className="bg-emerald-950/40 border border-emerald-500/30 rounded-2xl p-4">
+                    <span className="text-emerald-400 font-extrabold text-xs uppercase tracking-wider block mb-1">✓ OME Categorized Tech</span>
+                    <p className="text-white/70 text-xs">Zero surface drilling, 100% odourless CIB-approved formulations, 10-year warranty, IoT digital auditing.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="lg:col-span-4 flex flex-col items-center justify-center bg-white/10 rounded-2xl p-6 border border-white/15 text-center">
+                <div className="w-16 h-16 rounded-2xl bg-white border-2 border-[#18A558] p-1 mb-4 shadow-xl">
+                  <img src={logoImg} alt="OME Logo" className="w-full h-full object-contain" />
+                </div>
+                <div className="text-[#18A558] font-black text-sm uppercase tracking-wider mb-1">100% Property Protection</div>
+                <div className="text-white text-xs font-bold uppercase tracking-wider mb-4">Rank #1 Tech Specialist</div>
+                <a
+                  href="tel:+919492081706"
+                  className="bg-[#D2143A] hover:bg-[#b00f2e] text-white font-extrabold text-xs px-6 py-3 rounded-full transition-all shadow-lg uppercase tracking-wider"
+                >
+                  Consult Tech Specialist
+                </a>
+              </div>
+            </div>
+          </div>
+        </FadeIn>
       </div>
+
+      {/* Tech Details Modal */}
+      <AnimatePresence>
+        {selectedTech && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[99999] bg-black/80 backdrop-blur-md flex items-center justify-center p-4"
+            onClick={() => setSelectedTech(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-[#0C2D1C] border-2 border-[#18A558] rounded-3xl max-w-lg w-full p-6 text-white shadow-2xl relative overflow-hidden"
+            >
+              <button
+                onClick={() => setSelectedTech(null)}
+                className="absolute top-4 right-4 text-white/60 hover:text-white bg-white/10 p-2 rounded-full transition-colors"
+              >
+                <X size={18} />
+              </button>
+
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 rounded-2xl bg-[#18A558] text-white flex items-center justify-center shrink-0">
+                  <selectedTech.icon size={22} />
+                </div>
+                <div>
+                  <span className="bg-[#D2143A] text-white text-[9px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+                    {selectedTech.badge}
+                  </span>
+                  <h3 className="text-white font-extrabold text-xl mt-1" style={{ fontFamily: "Poppins, sans-serif" }}>
+                    {selectedTech.title}
+                  </h3>
+                </div>
+              </div>
+
+              <div className="bg-white/10 rounded-2xl p-4 mb-4 border border-white/10">
+                <div className="text-[#18A558] text-xs font-bold uppercase mb-1">Equipment / System Specs</div>
+                <div className="text-white font-semibold text-sm">{selectedTech.equipment}</div>
+              </div>
+
+              <p className="text-white/80 text-xs leading-relaxed mb-4">{selectedTech.desc}</p>
+
+              <div className="space-y-2 mb-5">
+                <div className="text-xs font-bold uppercase text-[#18A558]">Key Technical Features:</div>
+                {selectedTech.features.map((f) => (
+                  <div key={f} className="flex items-start gap-2 text-xs text-white/90">
+                    <CheckCircle2 size={13} className="text-[#18A558] mt-0.5 shrink-0" />
+                    <span>{f}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="bg-white/5 rounded-xl p-3 border border-white/10 mb-5 text-xs">
+                <span className="text-white/50 block mb-0.5">Target Applications:</span>
+                <span className="text-white font-medium">{selectedTech.applications}</span>
+              </div>
+
+              <div className="flex gap-3">
+                <a
+                  href="tel:+919492081706"
+                  className="flex-1 bg-[#D2143A] hover:bg-[#b00f2e] text-white font-extrabold text-xs py-3 rounded-xl text-center uppercase tracking-wider transition-colors"
+                >
+                  Book Service Tech
+                </a>
+                <button
+                  onClick={() => setSelectedTech(null)}
+                  className="bg-white/10 hover:bg-white/20 text-white font-bold text-xs px-5 rounded-xl transition-colors"
+                >
+                  Close
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
