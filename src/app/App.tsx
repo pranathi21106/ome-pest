@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "motion/react";
 import logoImg from "../assets/logo.png";
+import bniLogoImg from "../assets/bni_logo.png";
 import omePestPosterImg from "../assets/ome_pest_poster.jpg";
 import { IntroSplash } from "./components/IntroSplash";
 
@@ -13,7 +14,6 @@ import mosquitoImg from "../assets/services/mosquito.png";
 import fliesImg from "../assets/services/flies.png";
 import woodBorerImg from "../assets/services/wood_borer.png";
 import spiderImg from "../assets/services/spider.avif";
-import snakeImg from "../assets/services/snake_repellent.png";
 import birdImg from "../assets/services/bird_control.png";
 import foodStorageImg from "../assets/services/food_storage.png";
 import disinfectionImg from "../assets/services/disinfection.png";
@@ -91,7 +91,7 @@ const WHY_CHOOSE = [
   { icon: Zap, title: "Latest Technologies", desc: "Concealed piping systems and no-drill methods for seamless, damage-free treatments." },
   { icon: FlaskConical, title: "Industry Approved Chemicals", desc: "Safe, odourless chemicals from Envu, Tata Rallis, and FMC — internationally trusted brands." },
   { icon: Target, title: "Affordable Pricing", desc: "Premium service at transparent, competitive rates with no hidden charges or surprise fees." },
-  { icon: HeartHandshake, title: "Guaranteed Satisfaction", desc: "We stand behind every treatment with service warranty and comprehensive follow-up visits." },
+  { icon: HeartHandshake, title: "Guaranteed Satisfaction", desc: "We stand behind every treatment with guaranteed satisfaction and comprehensive follow-up visits." },
 ];
 
 const SERVICES = [
@@ -219,14 +219,14 @@ const TESTIMONIALS = [
     name: "Rajesh Kumar",
     company: "Hotel Grand Vizag",
     rating: 5,
-    review: "OME Pest Control transformed our hotel operations. Professional team, completely odourless treatments, and zero pest activity since service. Highly recommended for any hospitality business in Andhra Pradesh and Telangana.",
+    review: "OME PEST Control transformed our hotel operations. Professional team, completely odourless treatments, and zero pest activity since service. Highly recommended for any hospitality business in Andhra Pradesh and Telangana.",
     image: testimonialRajeshImg,
   },
   {
     name: "Priya Sharma",
     company: "Residential, Visakhapatnam",
     rating: 5,
-    review: "We had a severe termite infestation that two other companies couldn't solve. OME's reticulation system resolved it completely — without a single drill hole on our marble floors. Absolutely impressed.",
+    review: "We had a severe termite infestation that two other companies couldn't solve. OME PEST's reticulation system resolved it completely — without a single drill hole on our marble floors. Absolutely impressed.",
     image: testimonialPriyaImg,
   },
   {
@@ -269,7 +269,7 @@ const PROCESS_STEPS = [
 ];
 
 const TIMELINE = [
-  { year: "2009", title: "Company Founded", desc: "OME Pest Control established in Srikakulam with a commitment to professional, chemical-safe treatments." },
+  { year: "2009", title: "Company Founded", desc: "OME PEST Control established in Srikakulam with a commitment to professional, chemical-safe treatments." },
   { year: "2012", title: "Expanded to Vizianagaram", desc: "Growing client demand led to full operations across the Vizianagaram district." },
   { year: "2015", title: "First Commercial Contracts", desc: "Secured major contracts with hotels, restaurants, and industrial facilities across the region." },
   { year: "2018", title: "Government Certification", desc: "Achieved full government licensing and GST registration, formalising our compliance status." },
@@ -395,88 +395,135 @@ function Nav({
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-500 shadow-2xl">
-      {/* Top Navigation Bar: Big Logo + Navigation Links */}
-      <div className={`transition-all duration-500 ${scrolled || currentPage !== "home" ? "bg-[#0C2D1C] py-2.5 md:py-3 border-b border-white/10" : "bg-[#0C2D1C]/95 backdrop-blur-md py-3 border-b border-white/10"}`}>
-        <div className="max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between gap-4">
+    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 shadow-2xl">
+      {/* ─── 1. TOP BAR: One Big Title on Top with OME PEST Logo (Left) and BNI Logo (Top Right) ─── */}
+      <div className={`transition-all duration-300 ${scrolled ? "bg-[#0C2D1C] py-2 md:py-2.5" : "bg-[#0C2D1C] py-2.5 md:py-3"} border-b border-white/10`}>
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 flex items-center justify-between gap-2 sm:gap-4">
           
-          {/* BIG Logo Container */}
+          {/* Top Left: OME PEST Logo */}
           <button 
             onClick={() => onNavigate("home")} 
-            className="flex items-center gap-3.5 group text-left transition-transform hover:scale-102"
+            className="flex items-center gap-2.5 group text-left transition-transform hover:scale-102 shrink-0 cursor-pointer"
+            title="OME PEST - Home"
           >
-            <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 bg-white border-3 border-[#18A558] rounded-2xl flex items-center justify-center p-1.5 overflow-hidden shadow-2xl group-hover:border-[#D2143A] transition-all duration-300 shrink-0 relative">
-              <img src={logoImg} alt="OME Logo" className="w-full h-full object-contain" />
-              <div className="absolute -bottom-0.5 -right-0.5 bg-[#D2143A] text-white text-[9px] font-black px-1.5 py-0.5 rounded-tl-lg shadow">
+            <div className="w-13 h-13 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-white border-2 md:border-3 border-[#18A558] rounded-2xl flex items-center justify-center p-1 sm:p-1.5 overflow-hidden shadow-xl group-hover:border-[#D2143A] transition-all duration-300 shrink-0 relative">
+              <img src={logoImg} alt="OME PEST Logo" className="w-full h-full object-contain" />
+              <div className="absolute -bottom-0.5 -right-0.5 bg-[#D2143A] text-white text-[8px] sm:text-[9px] font-black px-1.5 py-0.5 rounded-tl-lg shadow">
                 #1
               </div>
             </div>
             
-            {/* Sub-tagline / Badge next to Big Logo */}
-            <div className="hidden sm:flex flex-col">
-              <span className="text-white font-black text-sm md:text-base tracking-wide flex items-center gap-1.5">
-                <BadgeCheck size={16} className="text-[#18A558]" /> OME Pest & Waterproofing
+            {/* Sub-tagline next to Logo */}
+            <div className="hidden xl:flex flex-col">
+              <span className="text-white font-black text-xs md:text-sm tracking-wide flex items-center gap-1">
+                <BadgeCheck size={14} className="text-[#18A558]" /> OME PEST
               </span>
-              <span className="text-white/80 text-xs font-bold tracking-wider uppercase">
-                Govt Licensed · Rank #1 Leader
+              <span className="text-white/75 text-[10px] font-bold tracking-wider uppercase">
+                Rank #1 Leader
               </span>
             </div>
           </button>
 
-          {/* Navigation Links and Action Buttons */}
-          <div className="flex items-center gap-4 md:gap-6">
-            <div className="hidden lg:flex items-center gap-6">
-              {NAV_LINKS.map((link) => (
-                <button
-                  key={link.page}
-                  onClick={() => onNavigate(link.page)}
-                  className={`text-sm font-bold uppercase tracking-wider transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-[#18A558] after:transition-all after:duration-300 ${
-                    currentPage === link.page ? "text-[#18A558] after:w-full font-black" : "text-white/90 hover:text-white after:w-0 hover:after:w-full"
-                  }`}
-                  style={{ fontFamily: "Inter, sans-serif" }}
-                >
-                  {link.label}
-                </button>
-              ))}
-            </div>
-
-            <div className="flex items-center gap-2 md:gap-3">
-              {onReplayIntro && (
-                <button
-                  onClick={onReplayIntro}
-                  title="Replay Logo Intro Animation"
-                  className="hidden xl:flex items-center gap-1.5 bg-white text-[#D2143A] hover:bg-[#D2143A] hover:text-white border-2 border-[#D2143A] text-xs font-black px-3.5 py-2 rounded-full shadow-md transition-all hover:scale-105 cursor-pointer uppercase tracking-wider"
-                  style={{ fontFamily: "Inter, sans-serif" }}
-                >
-                  <RefreshCw size={13} className="animate-spin-slow" /> Replay Intro
-                </button>
-              )}
-
-              <button
-                onClick={() => onNavigate("contact")}
-                className="hidden sm:flex items-center gap-2 bg-[#D2143A] text-white text-xs md:text-sm font-black px-4 py-2.5 rounded-full hover:bg-[#b00f2e] transition-all hover:shadow-lg hover:shadow-[#D2143A]/30 uppercase tracking-wider"
+          {/* Center: The ONLY ONE BIG TITLE on the top of the website */}
+          <div className="flex-1 flex items-center justify-center text-center px-1 sm:px-2 md:px-4">
+            <button
+              onClick={() => onNavigate("home")}
+              className="text-center group cursor-pointer inline-block"
+            >
+              <h1 
+                className="font-black text-[13px] sm:text-base md:text-xl lg:text-2xl text-white tracking-wide uppercase drop-shadow-md group-hover:text-emerald-300 transition-colors leading-tight"
+                style={{ fontFamily: "'Poppins', sans-serif" }}
               >
-                <Phone size={13} /> Book Inspection
-              </button>
-              <button onClick={() => setMenuOpen(!menuOpen)} className="lg:hidden text-white p-2.5 bg-white/10 rounded-xl hover:bg-white/20 transition-colors">
-                {menuOpen ? <X size={24} /> : <Menu size={24} />}
-              </button>
+                OME PEST CONTROL SERVICES &amp; WATER PROOFING SERVICES
+              </h1>
+            </button>
+          </div>
+
+          {/* Top Right Corner: Given BNI Logo */}
+          <div className="flex items-center justify-end shrink-0">
+            <div 
+              className="bg-white px-2 py-1 sm:px-3 sm:py-1.5 rounded-xl shadow-lg border border-gray-100 flex items-center justify-center h-12 sm:h-15 md:h-18 w-auto hover:shadow-xl transition-shadow"
+              title="BNI - Business Network International Member"
+            >
+              <img 
+                src={bniLogoImg} 
+                alt="BNI - Business Network International" 
+                className="h-full w-auto object-contain max-h-10 sm:max-h-12 md:max-h-15" 
+              />
             </div>
           </div>
         </div>
       </div>
 
-      {/* Dedicated Title Bar directly UNDER the Navigation Bar */}
-      <div className="bg-gradient-to-r from-[#0C2D1C] via-[#0f3d26] to-[#0C2D1C] border-b-2 border-[#D2143A] py-2 md:py-2.5 px-4 shadow-lg">
-        <div className="max-w-7xl mx-auto flex items-center justify-center text-center">
-          <button
-            onClick={() => onNavigate("home")}
-            className="inline-block bg-white border-2 border-[#D2143A] text-[#D2143A] px-4 py-1.5 sm:px-6 sm:py-2 rounded-2xl shadow-xl font-black text-xs sm:text-sm md:text-base lg:text-lg uppercase tracking-wider hover:bg-red-50 transition-colors"
-          >
-            <span className="font-black tracking-wider leading-tight">
-              OME PEST CONTROL SERVICES & WATER PROOFING SERVICES
+      {/* ─── 2. UNDER THE TITLE: Bold Toolbar presenting Home, About, Services, Blog, Contact ─── */}
+      <div className={`transition-all duration-300 ${scrolled ? "bg-[#081e13] py-2 border-b-2 border-[#18A558]" : "bg-[#092215]/98 backdrop-blur-md py-2.5 border-b-2 border-[#18A558]/50"} shadow-md`}>
+        <div className="max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between gap-4">
+          
+          {/* Bold Navigation Toolbar Links */}
+          <nav className="hidden md:flex items-center gap-1.5 lg:gap-2">
+            {NAV_LINKS.map((link) => {
+              const isActive = currentPage === link.page;
+              return (
+                <button
+                  key={link.page}
+                  onClick={() => onNavigate(link.page)}
+                  className={`px-4 py-1.5 rounded-xl text-xs sm:text-sm font-extrabold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
+                    isActive
+                      ? "bg-[#18A558] text-white shadow-md shadow-[#18A558]/40 scale-102"
+                      : "text-white/90 hover:text-white hover:bg-white/10"
+                  }`}
+                  style={{ fontFamily: "'Inter', sans-serif" }}
+                >
+                  {link.label}
+                </button>
+              );
+            })}
+          </nav>
+
+          {/* Mobile Toolbar Label (when navbar is collapsed on phones) */}
+          <div className="md:hidden flex items-center gap-2">
+            <span className="text-[#18A558] text-xs font-black uppercase tracking-wider bg-white/10 px-2.5 py-1 rounded-lg">
+              Menu · {NAV_LINKS.find((l) => l.page === currentPage)?.label || "Home"}
             </span>
-          </button>
+          </div>
+
+          {/* Toolbar Right: Action Buttons */}
+          <div className="flex items-center gap-2 md:gap-3 ml-auto">
+            {onReplayIntro && (
+              <button
+                onClick={onReplayIntro}
+                title="Replay Logo Intro Animation"
+                className="hidden xl:flex items-center gap-1.5 bg-white text-[#D2143A] hover:bg-[#D2143A] hover:text-white border-2 border-[#D2143A] text-xs font-black px-3 py-1.5 rounded-full shadow-md transition-all hover:scale-105 cursor-pointer uppercase tracking-wider"
+                style={{ fontFamily: "'Inter', sans-serif" }}
+              >
+                <RefreshCw size={12} className="animate-spin-slow" /> Replay Intro
+              </button>
+            )}
+
+            <a
+              href="tel:+919492081706"
+              className="hidden lg:flex items-center gap-1.5 bg-white/10 hover:bg-white/20 text-white border border-white/20 text-xs font-bold px-3 py-1.5 rounded-full transition-all"
+              style={{ fontFamily: "'Inter', sans-serif" }}
+            >
+              <Phone size={12} className="text-[#18A558]" /> 9492081706
+            </a>
+
+            <button
+              onClick={() => onNavigate("contact")}
+              className="flex items-center gap-1.5 bg-[#D2143A] text-white text-xs md:text-sm font-black px-4 py-1.5 sm:py-2 rounded-full hover:bg-[#b00f2e] transition-all hover:shadow-lg hover:shadow-[#D2143A]/30 uppercase tracking-wider cursor-pointer shadow-md"
+              style={{ fontFamily: "'Inter', sans-serif" }}
+            >
+              <Phone size={13} /> Book Inspection
+            </button>
+
+            <button 
+              onClick={() => setMenuOpen(!menuOpen)} 
+              className="md:hidden text-white p-2 bg-white/10 rounded-xl hover:bg-white/20 transition-colors cursor-pointer"
+              aria-label="Toggle Navigation Toolbar"
+            >
+              {menuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -484,11 +531,16 @@ function Nav({
       <AnimatePresence>
         {menuOpen && (
           <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-[#0C2D1C] border-t border-white/10 overflow-hidden shadow-2xl">
-            <div className="px-6 py-5 flex flex-col gap-4">
+            className="md:hidden bg-[#0C2D1C] border-t border-white/10 overflow-hidden shadow-2xl">
+            <div className="px-6 py-5 flex flex-col gap-3">
+              <div className="text-[#18A558] text-[11px] font-black uppercase tracking-wider mb-1">
+                Navigation Toolbar
+              </div>
               {NAV_LINKS.map((link) => (
                 <button key={link.page} onClick={() => { onNavigate(link.page); setMenuOpen(false); }}
-                  className={`text-left text-sm font-bold uppercase tracking-wider ${currentPage === link.page ? "text-[#18A558] font-black" : "text-white/80"}`}>
+                  className={`text-left text-sm font-extrabold uppercase tracking-wider py-1.5 px-3 rounded-lg transition-colors ${
+                    currentPage === link.page ? "bg-[#18A558] text-white" : "text-white/80 hover:bg-white/10"
+                  }`}>
                   {link.label}
                 </button>
               ))}
@@ -498,13 +550,13 @@ function Nav({
                     onReplayIntro();
                     setMenuOpen(false);
                   }}
-                  className="bg-white text-[#D2143A] border-2 border-[#D2143A] font-extrabold px-5 py-2.5 rounded-full text-xs uppercase tracking-wider flex items-center justify-center gap-2"
+                  className="bg-white text-[#D2143A] border-2 border-[#D2143A] font-extrabold px-5 py-2.5 rounded-full text-xs uppercase tracking-wider flex items-center justify-center gap-2 mt-2"
                 >
                   <RefreshCw size={13} /> Replay Intro Animation
                 </button>
               )}
               <button onClick={() => { onNavigate("contact"); setMenuOpen(false); }}
-                className="bg-[#D2143A] text-white font-extrabold px-5 py-3 rounded-full text-sm hover:bg-[#b00f2e] uppercase tracking-wider flex items-center justify-center gap-2">
+                className="bg-[#D2143A] text-white font-extrabold px-5 py-3 rounded-full text-sm hover:bg-[#b00f2e] uppercase tracking-wider flex items-center justify-center gap-2 mt-1 shadow-lg">
                 <Phone size={15} /> Book Free Inspection
               </button>
             </div>
@@ -541,10 +593,16 @@ function HeroSection({ onNavigate }: { onNavigate: (p: string) => void }) {
             className="text-white mb-6 leading-tight"
             style={{ fontFamily: "Poppins, sans-serif", fontWeight: 800, fontSize: "clamp(1.8rem, 3.8vw, 3.2rem)" }}>
             <span className="font-extrabold text-white block mb-2">Protecting Domestic & Commercial food and Pharma & hospitality</span>{" "}
-            <span className="inline-block bg-white text-[#D2143A] px-3.5 py-1 rounded-xl shadow-md border border-red-100 font-extrabold my-1">
-              Advanced Pest Management & Waterproofing
-            </span>{" "}
-            <span className="text-[#18A558]">Solutions</span>
+            <span 
+              className="inline-block bg-white text-[#D2143A] px-4 py-2 sm:px-5 sm:py-2.5 rounded-2xl shadow-2xl border-2 border-[#18A558] my-2 font-black italic tracking-wide"
+              style={{ 
+                fontFamily: "'Outfit', 'Poppins', sans-serif",
+                fontSize: "clamp(1.5rem, 3.2vw, 2.5rem)",
+                letterSpacing: "0.015em"
+              }}
+            >
+              Advanced Pest Management & Waterproofing Solutions
+            </span>
           </motion.h1>
 
           <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
@@ -599,7 +657,7 @@ function HeroSection({ onNavigate }: { onNavigate: (p: string) => void }) {
         <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.35 }}
           className="lg:col-span-5">
           <div className="bg-white/8 backdrop-blur-xl border border-white/15 rounded-3xl p-6 shadow-2xl">
-            <p className="text-white/60 text-xs font-bold tracking-widest uppercase mb-5" style={{ fontFamily: "Inter, sans-serif" }}>Why A.P, T.S, ODISSA Trusts OME Pest</p>
+            <p className="text-white/60 text-xs font-bold tracking-widest uppercase mb-5" style={{ fontFamily: "Inter, sans-serif" }}>Why A.P, T.S, ODISSA Trusts OME PEST</p>
             <div className="grid grid-cols-2 gap-3.5 mb-6">
               {[{ v: "5,000+", l: "Homes Protected" }, { v: "800+", l: "Businesses Served" }, { v: "20+", l: "Years Experience" }, { v: "Rank #1", l: "National Award" }].map((s) => (
                 <div key={s.l} className="bg-white/10 rounded-2xl p-4 text-center border border-white/10">
@@ -660,10 +718,10 @@ function AboutSnapshot({ onNavigate }: { onNavigate: (p: string) => void }) {
         </FadeIn>
 
         <div>
-          <FadeIn delay={0.1}><SectionTag>Who Is OME Pest?</SectionTag><SectionHeading>{"A.P, T.S, ODISSA's Most Trusted Pest Management & Waterproofing Leader"}</SectionHeading></FadeIn>
+          <FadeIn delay={0.1}><SectionTag>Who Is OME PEST?</SectionTag><SectionHeading>{"A.P, T.S, ODISSA's Most Trusted Pest Management & Waterproofing Leader"}</SectionHeading></FadeIn>
           <FadeIn delay={0.15}>
             <p className="text-gray-600 mt-5 mb-4 leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
-              Founded by <strong className="text-[#0C2D1C]">T.K.C Dev & Venkateshwarulu</strong> — <strong>OME PEST CONTROL SERVICES & WATER PROOFING SERVICES</strong> is the most trusted management leader, continuing its Rank 1 status across various pest management services. Our company was built on a single premise: every home, business, and institution deserves world-class protection without compromise.
+              Founded by <strong className="text-[#0C2D1C]">T.K.C Dev & Venkateswarulu</strong> — <strong>OME PEST CONTROL SERVICES & WATER PROOFING SERVICES</strong> is the most trusted management leader, continuing its Rank 1 status across various pest management services. Our company was built on a single premise: every home, business, and institution deserves world-class protection without compromise.
             </p>
             <p className="text-gray-600 mb-6 leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
               With over 20+ years of hands-on expertise, government licensing, <strong>Government - Certified by NIPH Govt of India</strong>, and <strong>Food safety implementation programme (urban pest management)</strong>, we are the benchmark for professional pest management across <strong>A.P, T.S, ODISSA</strong>.
@@ -701,9 +759,9 @@ function WhyChooseSection() {
       <div className="max-w-7xl mx-auto px-6">
         <FadeIn className="text-center mb-16">
           <SectionTag>Our Advantage</SectionTag>
-          <SectionHeading>Why Choose OME?</SectionHeading>
+          <SectionHeading>Why Choose OME PEST?</SectionHeading>
           <p className="text-gray-400 mt-4 max-w-lg mx-auto text-sm leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
-            Six pillars that define why OME is A.P, T.S, ODISSA's most recommended pest management and waterproofing authority.
+            Six pillars that define why OME PEST is A.P, T.S, ODISSA's most recommended pest management and waterproofing authority.
           </p>
         </FadeIn>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -768,7 +826,7 @@ interface TechServiceItem {
   desc: string;
   features: string[];
   applications: string;
-  warranty: string;
+  assurance: string;
   icon: any;
   badge: string;
 }
@@ -802,7 +860,7 @@ const TECH_CATEGORIES: TechCategory[] = [
           "Periodic recharge from external junction ports"
         ],
         applications: "Luxury Villas, New Residential & Commercial Constructions",
-        warranty: "10-Year Protection Guarantee",
+        assurance: "10-Year Long-Term Protection",
         icon: Zap,
         badge: "No Drilling Required",
       },
@@ -818,7 +876,7 @@ const TECH_CATEGORIES: TechCategory[] = [
           "Early prevention before structural damage"
         ],
         applications: "Heritage Buildings, Commercial Properties, Luxury Homes",
-        warranty: "Diagnostic Accuracy Certified",
+        assurance: "Diagnostic Accuracy Certified",
         icon: Target,
         badge: "Precision Diagnostics",
       },
@@ -834,7 +892,7 @@ const TECH_CATEGORIES: TechCategory[] = [
           "Zero indoor chemical exposure"
         ],
         applications: "Residential Gardens, Educational Institutions, Hospitals",
-        warranty: "Total Colony Elimination",
+        assurance: "Total Colony Elimination Assurance",
         icon: Bug,
         badge: "Eco-Friendly Matrix",
       },
@@ -859,7 +917,7 @@ const TECH_CATEGORIES: TechCategory[] = [
           "Ideal for high-moisture subterranean zones"
         ],
         applications: "Basements, Lift Pits, Retaining Walls, Water Tanks",
-        warranty: "10-Year Water-Lock Warranty",
+        assurance: "10-Year Water-Lock Protection",
         icon: Sparkles,
         badge: "Active Leak Stopping",
       },
@@ -875,7 +933,7 @@ const TECH_CATEGORIES: TechCategory[] = [
           "Weather & standing water resistant"
         ],
         applications: "Terraces, Balconies, Sunken Slabs, Exterior Walls",
-        warranty: "7–10 Year Weather Shield",
+        assurance: "7–10 Year Weather Protection Shield",
         icon: Shield,
         badge: "400% Elastic Shield",
       },
@@ -891,7 +949,7 @@ const TECH_CATEGORIES: TechCategory[] = [
           "Clear moisture percentage reporting"
         ],
         applications: "Bathrooms, Kitchen Walls, Ceiling Seepage Audit",
-        warranty: "Non-Destructive Diagnostic",
+        assurance: "Non-Destructive Diagnostic Precision",
         icon: Eye,
         badge: "Zero Wall Damage",
       },
@@ -916,7 +974,7 @@ const TECH_CATEGORIES: TechCategory[] = [
           "CIB & WHO approved formulations"
         ],
         applications: "Pharma Cleanrooms, Hospitals, Food Processing Units, IT Parks",
-        warranty: "Hospital-Grade Hygiene",
+        assurance: "Hospital-Grade Hygiene Standard",
         icon: Wind,
         badge: "Pharma Grade Mist",
       },
@@ -932,7 +990,7 @@ const TECH_CATEGORIES: TechCategory[] = [
           "100% non-toxic capture protocol"
         ],
         applications: "Pharma Warehouses, Rice Mills, Supermarkets, Hotels",
-        warranty: "Audit-Ready Compliance",
+        assurance: "Audit-Ready Compliance Protection",
         icon: Target,
         badge: "Smart Sensor Network",
       },
@@ -948,7 +1006,7 @@ const TECH_CATEGORIES: TechCategory[] = [
           "Shatterproof UV LED lamps"
         ],
         applications: "Commercial Kitchens, Food Packaging Lines, Dining Halls",
-        warranty: "Food Safety Approved",
+        assurance: "Food Safety Certified Protection",
         icon: Zap,
         badge: "HACCP Compliant",
       },
@@ -973,7 +1031,7 @@ const TECH_CATEGORIES: TechCategory[] = [
           "Sustained 6-month domino elimination"
         ],
         applications: "Residential Kitchens, Modular Cabinets, Electronics",
-        warranty: "6-Month Protection Guarantee",
+        assurance: "6-Month Pest-Free Assurance",
         icon: FlaskConical,
         badge: "Odourless & No-Move",
       },
@@ -989,7 +1047,7 @@ const TECH_CATEGORIES: TechCategory[] = [
           "Immediate room re-entry"
         ],
         applications: "Hotel Bedrooms, Luxury Mattresses, Upholstery",
-        warranty: "Complete Egg & Bug Kill",
+        assurance: "Complete Egg & Bug Elimination",
         icon: Zap,
         badge: "100% Chemical-Free",
       },
@@ -1005,7 +1063,7 @@ const TECH_CATEGORIES: TechCategory[] = [
           "Prevents corrosive droppings"
         ],
         applications: "Residential Balconies, Building Facades, AC Units",
-        warranty: "5-Year Netting Warranty",
+        assurance: "5-Year Heavy-Duty Netting Protection",
         icon: Wind,
         badge: "Humane Exclusion",
       },
@@ -1135,7 +1193,7 @@ function TechnologySection() {
 
                   <div className="border-t border-white/10 pt-4 mt-auto">
                     <div className="flex items-center justify-between text-xs text-white/60 mb-3">
-                      <span>Warranty: <strong className="text-white">{tech.warranty}</strong></span>
+                      <span>Protection: <strong className="text-white">{tech.assurance}</strong></span>
                     </div>
                     <button
                       onClick={() => setSelectedTech(tech)}
@@ -1156,13 +1214,13 @@ function TechnologySection() {
             <div className="grid lg:grid-cols-12 gap-8 items-center">
               <div className="lg:col-span-8">
                 <div className="inline-flex items-center gap-2 bg-[#D2143A] text-white text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-3">
-                  <Shield size={14} /> Traditional vs OME Advanced Technology
+                  <Shield size={14} /> Traditional vs OME PEST Advanced Technology
                 </div>
                 <h3 className="text-white font-extrabold text-2xl mb-3" style={{ fontFamily: "Poppins, sans-serif" }}>
-                  Why OME Categorized Technology Outperforms Traditional Methods
+                  Why OME PEST Categorized Technology Outperforms Traditional Methods
                 </h3>
                 <p className="text-white/80 text-sm leading-relaxed mb-6 font-medium">
-                  Traditional pest control relies on aggressive floor drilling, messy odor sprays, and temporary surface treatments. OME's specialized service technology uses subsurface concealed reticulation, high-pressure PU grout injection, and IoT digital sensors to eliminate pests permanently with zero property damage.
+                  Traditional pest control relies on aggressive floor drilling, messy odor sprays, and temporary surface treatments. OME PEST's specialized service technology uses subsurface concealed reticulation, high-pressure PU grout injection, and IoT digital sensors to eliminate pests permanently with zero property damage.
                 </p>
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="bg-red-950/40 border border-red-500/30 rounded-2xl p-4">
@@ -1170,15 +1228,15 @@ function TechnologySection() {
                     <p className="text-white/70 text-xs">Floor drilling damage, strong chemical odor, frequent re-infestation, high long-term maintenance cost.</p>
                   </div>
                   <div className="bg-emerald-950/40 border border-emerald-500/30 rounded-2xl p-4">
-                    <span className="text-emerald-400 font-extrabold text-xs uppercase tracking-wider block mb-1">✓ OME Categorized Tech</span>
-                    <p className="text-white/70 text-xs">Zero surface drilling, 100% odourless CIB-approved formulations, 10-year warranty, IoT digital auditing.</p>
+                    <span className="text-emerald-400 font-extrabold text-xs uppercase tracking-wider block mb-1">✓ OME PEST Categorized Tech</span>
+                    <p className="text-white/70 text-xs">Zero surface drilling, 100% odourless CIB-approved formulations, certified long-term protection, IoT digital auditing.</p>
                   </div>
                 </div>
               </div>
 
               <div className="lg:col-span-4 flex flex-col items-center justify-center bg-white/10 rounded-2xl p-6 border border-white/15 text-center">
                 <div className="w-16 h-16 rounded-2xl bg-white border-2 border-[#18A558] p-1 mb-4 shadow-xl">
-                  <img src={logoImg} alt="OME Logo" className="w-full h-full object-contain" />
+                  <img src={logoImg} alt="OME PEST Logo" className="w-full h-full object-contain" />
                 </div>
                 <div className="text-[#18A558] font-black text-sm uppercase tracking-wider mb-1">100% Property Protection</div>
                 <div className="text-white text-xs font-bold uppercase tracking-wider mb-4">Rank #1 Tech Specialist</div>
@@ -1686,7 +1744,7 @@ function Footer({
           <div>
             <div className="flex items-center gap-3 mb-5">
               <div className="w-12 h-12 bg-white border-2 border-[#18A558] rounded-xl flex items-center justify-center p-1 overflow-hidden shadow-md shrink-0">
-                <img src={logoImg} alt="OME Logo" className="w-full h-full object-contain" />
+                <img src={logoImg} alt="OME PEST Logo" className="w-full h-full object-contain" />
               </div>
               <div className="bg-white border-2 border-[#D2143A] text-[#D2143A] px-3 py-1.5 rounded-xl font-black text-xs uppercase tracking-wider shadow-md">
                 OME PEST CONTROL SERVICES & WATER PROOFING SERVICES
@@ -1847,17 +1905,17 @@ function AboutPage({ onNavigate }: { onNavigate: (p: string) => void }) {
           <FadeIn>
             <div className="aspect-[4/3] rounded-3xl overflow-hidden bg-gray-100">
               <img src={companyStoryImg}
-                alt="OME team at work" className="w-full h-full object-cover" />
+                alt="OME PEST team at work" className="w-full h-full object-cover" />
             </div>
           </FadeIn>
           <div>
             <FadeIn delay={0.1}><SectionTag>Our Story</SectionTag><SectionHeading>From a Vision to Andhra Pradesh and Telangana's Benchmark</SectionHeading></FadeIn>
             <FadeIn delay={0.15}>
               <p className="text-gray-500 mt-5 mb-4 leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
-                OME Pest Control Services was founded with a clear purpose: to bring world-class pest management to the homes, businesses, and communities of Andhra Pradesh and Telangana — with the professionalism, safety standards, and technological sophistication that residents and industries deserve.
+                OME PEST Control Services was founded with a clear purpose: to bring world-class pest management to the homes, businesses, and communities of Andhra Pradesh and Telangana — with the professionalism, safety standards, and technological sophistication that residents and industries deserve.
               </p>
               <p className="text-gray-500 mb-4 leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
-                What began as a single-minded commitment to quality has grown into a nationally recognised operation. Today, OME holds government licensing, GST registration, and the industry's highest certifications — and our work continues its Rank 1 status across various pest management services.
+                What began as a single-minded commitment to quality has grown into a nationally recognised operation. Today, OME PEST holds government licensing, GST registration, and the industry's highest certifications — and our work continues its Rank 1 status across various pest management services.
               </p>
               <p className="text-gray-500 leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
                 Across Srikakulam, Vizianagaram, Visakhapatnam, and state-wide networks, we've completed over 12,000 treatments and protected thousands of families and businesses — not just from pests, but from the disruption and damage they cause.
@@ -1872,7 +1930,7 @@ function AboutPage({ onNavigate }: { onNavigate: (p: string) => void }) {
         <div className="max-w-5xl mx-auto px-6">
           <FadeIn className="text-center mb-8">
             <SectionTag>Leadership & Management</SectionTag>
-            <SectionHeading>T.K.C Dev & Venkateshwarulu</SectionHeading>
+            <SectionHeading>T.K.C Dev & Venkateswarulu</SectionHeading>
             <div className="flex flex-wrap gap-3 justify-center mt-4 mb-2">
               {["Top Operations Managers", "Rank #1 in Pest Management", "20+ Years Experience", "NIPH Certified"].map((badge) => (
                 <span key={badge} className="text-xs bg-white text-[#D2143A] font-extrabold px-4 py-1.5 rounded-full border border-red-200 shadow-sm">{badge}</span>
@@ -1882,13 +1940,13 @@ function AboutPage({ onNavigate }: { onNavigate: (p: string) => void }) {
           <FadeIn delay={0.1}>
             <div className="bg-white rounded-3xl p-8 md:p-10 border border-gray-100 shadow-lg space-y-5">
               <p className="text-gray-600 text-base leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
-                <strong>T.K.C Dev & Venkateshwarulu</strong> bring over 20+ years of deep expertise in pest management operations, team leadership, and customer-first service delivery. Their philosophy is simple: every client deserves the same precision, care, and professionalism — whether they're a family in a one-bedroom apartment or the manager of a 50-room hotel or pharmaceutical facility.
+                <strong>T.K.C Dev & Venkateswarulu</strong> bring over 20+ years of deep expertise in pest management operations, team leadership, and customer-first service delivery. Their philosophy is simple: every client deserves the same precision, care, and professionalism — whether they're a family in a one-bedroom apartment or the manager of a 50-room hotel or pharmaceutical facility.
               </p>
               <p className="text-gray-600 text-base leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
-                Their recognition as Rank 1 pest management leaders isn't just personal achievement — it's a reflection of the rigorous quality standards they have built into every aspect of OME's operations, from chemical selection to technician training to post-treatment follow-up and waterproofing excellence.
+                Their recognition as Rank 1 pest management leaders isn't just personal achievement — it's a reflection of the rigorous quality standards they have built into every aspect of OME PEST's operations, from chemical selection to technician training to post-treatment follow-up and waterproofing excellence.
               </p>
               <p className="text-gray-600 text-base leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>
-                Under their leadership, OME became one of the first companies in A.P, T.S, ODISSA to offer no-drill advanced technology and certified urban pest management — a commitment to innovation that defines the company's future.
+                Under their leadership, OME PEST became one of the first companies in A.P, T.S, ODISSA to offer no-drill advanced technology and certified urban pest management — a commitment to innovation that defines the company's future.
               </p>
             </div>
           </FadeIn>
@@ -1903,7 +1961,7 @@ function AboutPage({ onNavigate }: { onNavigate: (p: string) => void }) {
             {[
               { label: "Mission", text: "Protecting human health, properties, and businesses across Andhra Pradesh and Telangana using environmentally responsible, scientifically backed pest management solutions." },
               { label: "Vision", text: "To become Andhra Pradesh and Telangana's most trusted pest management company through innovation, advanced technology, rigorous safety standards, and outstanding customer satisfaction." },
-              { label: "Commitment", text: "We never compromise on chemical safety, treatment quality, or post-service care. Every client receives warranty-backed service and dedicated follow-up." },
+              { label: "Commitment", text: "We never compromise on chemical safety, treatment quality, or post-service care. Every client receives certified service and dedicated follow-up." },
             ].map((item, i) => (
               <FadeIn key={item.label} delay={i * 0.1}>
                 <div className="bg-white/5 border border-white/10 rounded-3xl p-8">
@@ -2053,7 +2111,7 @@ function ComparisonTable() {
                 <div className="text-red-400 text-xs">Drilling Method</div>
               </div>
               <div className="p-5 text-center border-l border-white/10 bg-[#18A558]/10">
-                <div className="text-[#18A558] text-xs font-semibold uppercase tracking-wide mb-1" style={{ fontFamily: "Inter, sans-serif" }}>Modern (OME)</div>
+                <div className="text-[#18A558] text-xs font-semibold uppercase tracking-wide mb-1" style={{ fontFamily: "Inter, sans-serif" }}>Modern (OME PEST)</div>
                 <div className="text-[#18A558]/60 text-xs">Reticulation System</div>
               </div>
             </div>
@@ -2090,8 +2148,8 @@ function ServicesPage({ onNavigate }: { onNavigate: (p: string) => void }) {
       problem: "Termites cause structural damage worth lakhs before they are even detected. They feed silently on wood, cellulose, paper, and cloth materials.", 
       signs: ["Hollow-sounding wood when tapped", "Mud tubes along walls or foundations", "Discarded wings near windows and doors", "Buckling paint or wrapped walls"], 
       risks: "Structural weakening of buildings, destruction of furniture and woodwork, extremely costly repairs if untreated for extended periods.", 
-      treatment: "1. Drill fill treatment (liquid termicide soil treatment) 2. Termite baiting system 3. Reticulation piping system with warranties", 
-      frequency: "Single treatment · 1-year, 5-year, or 10-year warranty options" 
+      treatment: "1. Drill fill treatment (liquid termiticide soil treatment) 2. Termites baiting system (interior and exterior areas) 3. Reticulation piping system", 
+      frequency: "Single treatment · Periodic inspection & reticulation recharge" 
     },
     { 
       label: "Cockroach Management", 
@@ -2131,17 +2189,17 @@ function ServicesPage({ onNavigate }: { onNavigate: (p: string) => void }) {
       signs: ["Biting activity at dawn and dusk", "Stagnant water on the property", "Larvae visible in still water containers"], 
       risks: "Dengue, malaria, chikungunya, West Nile virus, severe allergic reactions.", 
       treatment: "Residual spray, ULV cold fogging, and larvicidal treatment to eliminate all breeding sites.", 
-      frequency: "Monthly during monsoon · Every 2 months otherwise" 
+      frequency: "Weekly / Fortnightly" 
     },
     { 
       label: "Flies Management", 
       icon: Wind, 
       img: fliesImg, 
       problem: "House flies and drain flies are major food contamination risks in kitchens, restaurants, and food storage areas, carrying over 100 known pathogens.", 
-      signs: ["Visible flies congregating near food areas", "Maggots in bins or drains", "House fly, blue bottle fly, drain fly, fruit fly, filter fly, blow fly sightings"], 
+      signs: ["Visible flies congregating near food areas", "Maggots in bins or drains", "House flies, blue bottle flies, drain flies, fruit flies, filter flies, blow flies sightings"], 
       risks: "Contamination of food preparation surfaces, spread of typhoid, cholera, and dysentery pathogens.", 
-      treatment: "UV fly trap installation, residual spray, drain treatment, exclusion screens, and full sanitation audit.", 
-      frequency: "Monthly service (commercial kitchens) · Quarterly (residential)" 
+      treatment: "UV flies trap installation, residual spray, drain treatment, exclusion screens, and full sanitation audit.", 
+      frequency: "Weekly/Monthly services (commercial) · Quarterly (residential)" 
     },
     { 
       label: "Wood Borer Management", 
@@ -2150,8 +2208,8 @@ function ServicesPage({ onNavigate }: { onNavigate: (p: string) => void }) {
       problem: "Wood borers tunnel through timber framework, antique furniture, and roof trusses containing cellulose. They infest species like house longhorn beetle and powder post beetle.", 
       signs: ["Small round exit holes in wood surfaces", "Fine powdery wood dust (frass) below furniture", "Weakened or crumbling wood", "Pinholes in plywood or timber structures"], 
       risks: "Structural weakening of timber frames, destruction of valuable furniture, roof truss damage.", 
-      treatment: "1. Syringe injection of chemical termicide 2. Chemical surface spraying (preservative treatment) 3. Wood preservation treatment (solvent-based/water-based/gel based) with warranty", 
-      frequency: "Every 3–6 months for high-activity areas · Annual/seasonal inspections" 
+      treatment: "1. Syringe injection of chemical termiticide 2. Chemical surface spraying (preservative treatment) 3. Wood preservation treatment (solvent-based/water-based/gel based)", 
+      frequency: "As on required" 
     },
     { 
       label: "Spider Management", 
@@ -2161,17 +2219,7 @@ function ServicesPage({ onNavigate }: { onNavigate: (p: string) => void }) {
       signs: ["Webs in corners, rafters, and storage", "Egg sacs in sheltered spots", "Sightings of large or numerous spiders", "Webs near lighting fixtures"], 
       risks: "Venomous bites from certain species, customer and guest complaints in hospitality, psychological distress.", 
       treatment: "Targeted residual spray, web removal, de-webbing of premises, and entry-point sealing.", 
-      frequency: "Every 3–6 months" 
-    },
-    { 
-      label: "Snake Management", 
-      icon: Shield, 
-      img: snakeImg, 
-      problem: "Snakes entering residential or industrial properties pose serious safety risks. Effective management involves safe removal and long-term prevention.", 
-      signs: ["Direct sightings on the property", "Shed skin found in corners or under objects", "Rodent activity (which attracts snakes)", "Gaps or holes in foundations and walls"], 
-      risks: "Venomous bites, psychological distress, risk to children and pets, particularly in agricultural and industrial areas.", 
-      treatment: "Safe professional removal, property inspection, sealing of entry points, and rodent control to remove attractants.", 
-      frequency: "As needed · Annual property inspection recommended" 
+      frequency: "As per the Requirement" 
     },
     { 
       label: "Bird Control Solutions", 
@@ -2191,7 +2239,7 @@ function ServicesPage({ onNavigate }: { onNavigate: (p: string) => void }) {
       signs: ["Visible insects or larvae in stored goods", "Webbing on grain or flour sacks", "Damaged packaging", "Musty odours from stored produce"], 
       risks: "Total inventory loss, regulatory non-compliance, FSSAI violations, significant financial loss.", 
       treatment: "Fumigation, residual spray, pheromone traps, HACCP-compliant monitoring programs, and staff hygiene training.", 
-      frequency: "Monthly inspections · Fumigation as needed" 
+      frequency: "Prophylactic spraying only need basis" 
     },
     { 
       label: "Virus & Bacteria Disinfection", 
@@ -2217,11 +2265,22 @@ function ServicesPage({ onNavigate }: { onNavigate: (p: string) => void }) {
       label: "Water Proof & Leakage Services",
       icon: Shield,
       img: waterproofingImg,
+      isWaterproofing: true,
       problem: "Water leakage and seepage cause severe structural deterioration, damp walls, mold growth, and paint peeling, damaging luxury interiors and concrete slabs.",
       signs: ["Damp patches or wet stains on walls/ceilings", "Efflorescence (white salt deposits) on brickwork", "Peeling paint or blistering wallpaper", "Water pooling on roofs, slabs, or bathrooms", "Musty odors and mold growth"],
       risks: "Weakening of structural concrete and rebar, health hazards from mold spores, damage to premium interior finishes, electrical hazards from wiring contact.",
-      treatment: "Polyester/polyurethane membrane coatings, pressure grouting for cracks, crystalline waterproofing for concrete, and bathroom joint sealing without tiling removal.",
-      frequency: "Typically a single long-term treatment with 5-year or 10-year warranty options"
+      treatment: "High-pressure polyurethane grouting in cracks, epoxy tile grouting, polymer membrane coatings, and crystalline joint sealing.",
+      frequency: "Long-term preventive treatment · Periodic inspection & maintenance",
+      waterproofingData: "Waterproof service’s: Bathroom grouting, bathroom epoxy, pressure grouting in cracks , Terrace areas, swimming pool area, overhead tanks, common utility areas",
+      waterproofServices: [
+        { title: "Bathroom Grouting", desc: "Precision joint and tile grouting preventing subterranean moisture seep." },
+        { title: "Bathroom Epoxy", desc: "Chemical-resistant, 100% waterproof durable epoxy barrier for all wet zones." },
+        { title: "Pressure Grouting in Cracks", desc: "High-pressure polyurethane injection to permanently seal hairline and structural cracks." },
+        { title: "Terrace Areas", desc: "Seamless UV-reflective elastomeric liquid membrane preventing terrace rainwater seepage." },
+        { title: "Swimming Pool Area", desc: "Heavy-duty hydraulic water-retaining waterproof coatings for swimming pool basins and surrounds." },
+        { title: "Overhead Tanks", desc: "Food-grade non-toxic crystalline tank lining preventing structural leakage." },
+        { title: "Common Utility Areas", desc: "Dedicated moisture protection for washing areas, balconies, pipe shafts, and utility sumps." }
+      ]
     }
   ];
 
@@ -2231,75 +2290,162 @@ function ServicesPage({ onNavigate }: { onNavigate: (p: string) => void }) {
   return (
     <>
       <PageHero page="Services" title="Advanced Pest Management Solutions"
-        subtitle="14 specialist treatment programs covering every pest and waterproofing requirement — for residences, luxury properties, and large-scale commercial facilities." />
+        subtitle="13 specialist treatment programs covering every pest and waterproofing requirement — for residences, luxury properties, and large-scale commercial facilities." />
 
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          {/* Service Selector */}
-          <div className="flex flex-wrap gap-2 mb-12 justify-center">
-            {allServices.map((s, i) => (
-              <button key={s.label} onClick={() => setActive(i)}
-                className={`text-sm font-medium px-4 py-2 rounded-full border transition-all ${active === i ? "bg-[#0C2D1C] text-white border-[#0C2D1C]" : "bg-white text-gray-500 border-gray-200 hover:border-[#0C2D1C]/40"}`}
-                style={{ fontFamily: "Inter, sans-serif" }}>
-                {s.label}
-              </button>
-            ))}
+          {/* Service Selector Tabs */}
+          <div className="flex flex-wrap gap-2.5 mb-12 justify-center">
+            {allServices.map((s, i) => {
+              const isSelected = active === i;
+              if (s.isWaterproofing) {
+                return (
+                  <button
+                    key={s.label}
+                    onClick={() => setActive(i)}
+                    className={`text-sm font-black px-5 py-2.5 rounded-full border-2 transition-all duration-300 cursor-pointer flex items-center gap-2 ${
+                      isSelected
+                        ? "bg-gradient-to-r from-emerald-600 via-teal-700 to-[#0C2D1C] text-white border-emerald-400 shadow-xl shadow-emerald-600/30 ring-2 ring-emerald-400/50 scale-105"
+                        : "bg-emerald-50 text-emerald-800 border-emerald-300 hover:bg-emerald-100 hover:scale-102 shadow-sm"
+                    }`}
+                    style={{ fontFamily: "'Inter', sans-serif" }}
+                  >
+                    <Sparkles size={14} className="text-amber-300 animate-spin-slow" />
+                    <span>{s.label}</span>
+                    <span className="bg-[#D2143A] text-white text-[9px] font-black px-2 py-0.5 rounded-full shadow">
+                      HIGHLIGHTED
+                    </span>
+                  </button>
+                );
+              }
+              return (
+                <button
+                  key={s.label}
+                  onClick={() => setActive(i)}
+                  className={`text-sm font-bold px-4 py-2 rounded-full border transition-all cursor-pointer ${
+                    isSelected
+                      ? "bg-[#0C2D1C] text-white border-[#0C2D1C] shadow-md"
+                      : "bg-white text-gray-500 border-gray-200 hover:border-[#0C2D1C]/40 hover:text-[#0C2D1C]"
+                  }`}
+                  style={{ fontFamily: "'Inter', sans-serif" }}
+                >
+                  {s.label}
+                </button>
+              );
+            })}
           </div>
 
           <AnimatePresence mode="wait">
             <motion.div key={active} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.3 }} className="grid lg:grid-cols-2 gap-16 items-start">
-              <div className="aspect-[4/3] rounded-3xl overflow-hidden bg-gray-100">
-                <img src={svc.img}
-                  alt={svc.label} className="w-full h-full object-cover" />
-              </div>
-
-              <div>
-                <div className="flex items-center gap-3 mb-5">
-                  <div className="w-12 h-12 bg-[#18A558]/10 rounded-2xl flex items-center justify-center">
-                    <svc.icon size={22} className="text-[#18A558]" />
-                  </div>
-                  <h2 className="text-[#0C2D1C] font-extrabold text-2xl" style={{ fontFamily: "Poppins, sans-serif" }}>{svc.label}</h2>
-                </div>
-
-                <div className="space-y-4">
-                  <div className="bg-[#F8FAFB] rounded-2xl p-5">
-                    <div className="text-[#0C2D1C] font-bold text-xs tracking-widest uppercase mb-2" style={{ fontFamily: "Poppins, sans-serif" }}>The Problem</div>
-                    <p className="text-gray-500 text-sm leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>{svc.problem}</p>
-                  </div>
-                  <div className="bg-[#F8FAFB] rounded-2xl p-5">
-                    <div className="text-[#0C2D1C] font-bold text-xs tracking-widest uppercase mb-3" style={{ fontFamily: "Poppins, sans-serif" }}>Signs of Infestation</div>
-                    <ul className="space-y-2">
-                      {svc.signs.map((sign) => (
-                        <li key={sign} className="flex items-start gap-2 text-gray-500 text-sm" style={{ fontFamily: "Inter, sans-serif" }}>
-                          <CheckCircle2 size={13} className="text-[#18A558] mt-0.5 flex-shrink-0" /> {sign}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="bg-[#F8FAFB] rounded-2xl p-5">
-                      <div className="text-[#0C2D1C] font-bold text-xs tracking-widest uppercase mb-2" style={{ fontFamily: "Poppins, sans-serif" }}>Risks</div>
-                      <p className="text-gray-500 text-xs leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>{svc.risks}</p>
+              transition={{ duration: 0.3 }} className="space-y-8">
+              
+              {/* Highlighted Banner for Water Proof & Leakage Services */}
+              {svc.isWaterproofing && (
+                <div className="bg-gradient-to-r from-[#0C2D1C] via-[#0e3b24] to-[#082215] border-2 border-emerald-400/60 rounded-3xl p-6 sm:p-8 text-white shadow-2xl relative overflow-hidden">
+                  <div className="absolute -right-10 -bottom-10 w-60 h-60 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+                  <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+                    <div className="inline-flex items-center gap-2 bg-[#D2143A] text-white text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-wider shadow">
+                      <Sparkles size={14} /> Specialized Waterproofing Division
                     </div>
-                    <div className="bg-[#F8FAFB] rounded-2xl p-5">
-                      <div className="text-[#0C2D1C] font-bold text-xs tracking-widest uppercase mb-2" style={{ fontFamily: "Poppins, sans-serif" }}>Treatment</div>
-                      <p className="text-gray-500 text-xs leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>{svc.treatment}</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3 bg-[#18A558]/8 border border-[#18A558]/20 rounded-2xl p-4">
-                    <Clock size={15} className="text-[#18A558]" />
-                    <span className="text-[#0C2D1C] text-sm" style={{ fontFamily: "Inter, sans-serif" }}>
-                      <strong>Frequency:</strong> {svc.frequency}
+                    <span className="text-emerald-400 text-xs font-bold tracking-widest uppercase">
+                      100% Leak-Proof Guarantee Standard
                     </span>
                   </div>
+                  
+                  <h3 className="text-white font-extrabold text-2xl sm:text-3xl mb-3" style={{ fontFamily: "'Poppins', sans-serif" }}>
+                    Waterproof Service’s
+                  </h3>
+
+                  {/* Client's exact data highlighted */}
+                  <div className="bg-white/10 border-2 border-emerald-400/40 rounded-2xl p-4 sm:p-5 mb-6 backdrop-blur-md">
+                    <p className="text-emerald-300 text-xs font-black uppercase tracking-wider mb-1.5">
+                      Scope of Waterproofing Solutions:
+                    </p>
+                    <p className="text-white font-extrabold text-sm sm:text-base leading-relaxed" style={{ fontFamily: "'Inter', sans-serif" }}>
+                      "{svc.waterproofingData}"
+                    </p>
+                  </div>
+
+                  {/* 7 Specialized Waterproofing Cards */}
+                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 pt-2">
+                    {svc.waterproofServices?.map((item, idx) => (
+                      <div key={item.title} className="bg-white/8 hover:bg-white/15 border border-white/15 rounded-2xl p-4 transition-all duration-300">
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className="w-6 h-6 rounded-lg bg-emerald-500/30 text-emerald-300 font-black text-xs flex items-center justify-center">
+                            0{idx + 1}
+                          </span>
+                          <h4 className="text-white font-bold text-sm" style={{ fontFamily: "'Poppins', sans-serif" }}>
+                            {item.title}
+                          </h4>
+                        </div>
+                        <p className="text-white/70 text-xs leading-relaxed" style={{ fontFamily: "'Inter', sans-serif" }}>
+                          {item.desc}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Standard Dual Column Layout */}
+              <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+                <div className="aspect-[4/3] rounded-3xl overflow-hidden bg-gray-100 shadow-xl border border-gray-100 relative group">
+                  <img src={svc.img}
+                    alt={svc.label} className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500" />
+                  {svc.isWaterproofing && (
+                    <div className="absolute top-4 left-4 bg-emerald-600/90 backdrop-blur-md text-white text-xs font-black px-3.5 py-1.5 rounded-full shadow-lg border border-emerald-300 flex items-center gap-1.5">
+                      <Sparkles size={13} /> Specialized Division
+                    </div>
+                  )}
                 </div>
 
-                <button onClick={() => onNavigate("contact")}
-                  className="mt-6 flex items-center gap-2 bg-[#0C2D1C] text-white font-bold px-7 py-3.5 rounded-full hover:bg-[#18A558] transition-colors"
-                  style={{ fontFamily: "Inter, sans-serif" }}>
-                  Book an Inspection <ArrowRight size={15} />
-                </button>
+                <div>
+                  <div className="flex items-center gap-3 mb-5">
+                    <div className="w-12 h-12 bg-[#18A558]/10 rounded-2xl flex items-center justify-center">
+                      <svc.icon size={22} className="text-[#18A558]" />
+                    </div>
+                    <h2 className="text-[#0C2D1C] font-extrabold text-2xl" style={{ fontFamily: "Poppins, sans-serif" }}>{svc.label}</h2>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="bg-[#F8FAFB] rounded-2xl p-5 border border-gray-100">
+                      <div className="text-[#0C2D1C] font-bold text-xs tracking-widest uppercase mb-2" style={{ fontFamily: "Poppins, sans-serif" }}>The Problem</div>
+                      <p className="text-gray-500 text-sm leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>{svc.problem}</p>
+                    </div>
+                    <div className="bg-[#F8FAFB] rounded-2xl p-5 border border-gray-100">
+                      <div className="text-[#0C2D1C] font-bold text-xs tracking-widest uppercase mb-3" style={{ fontFamily: "Poppins, sans-serif" }}>Signs &amp; Identification</div>
+                      <ul className="space-y-2">
+                        {svc.signs.map((sign) => (
+                          <li key={sign} className="flex items-start gap-2 text-gray-500 text-sm" style={{ fontFamily: "Inter, sans-serif" }}>
+                            <CheckCircle2 size={13} className="text-[#18A558] mt-0.5 flex-shrink-0" /> {sign}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="grid grid-cols-2 gap-3">
+                      <div className="bg-[#F8FAFB] rounded-2xl p-5 border border-gray-100">
+                        <div className="text-[#0C2D1C] font-bold text-xs tracking-widest uppercase mb-2" style={{ fontFamily: "Poppins, sans-serif" }}>Risks</div>
+                        <p className="text-gray-500 text-xs leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>{svc.risks}</p>
+                      </div>
+                      <div className="bg-[#F8FAFB] rounded-2xl p-5 border border-gray-100">
+                        <div className="text-[#0C2D1C] font-bold text-xs tracking-widest uppercase mb-2" style={{ fontFamily: "Poppins, sans-serif" }}>Treatment Protocol</div>
+                        <p className="text-gray-500 text-xs leading-relaxed" style={{ fontFamily: "Inter, sans-serif" }}>{svc.treatment}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3 bg-[#18A558]/8 border border-[#18A558]/20 rounded-2xl p-4">
+                      <Clock size={15} className="text-[#18A558]" />
+                      <span className="text-[#0C2D1C] text-sm" style={{ fontFamily: "Inter, sans-serif" }}>
+                        <strong>Frequency:</strong> {svc.frequency}
+                      </span>
+                    </div>
+                  </div>
+
+                  <button onClick={() => onNavigate("contact")}
+                    className="mt-6 flex items-center gap-2 bg-[#0C2D1C] text-white font-extrabold px-7 py-3.5 rounded-full hover:bg-[#18A558] transition-colors shadow-lg cursor-pointer"
+                    style={{ fontFamily: "Inter, sans-serif" }}>
+                    Book an Inspection <ArrowRight size={15} />
+                  </button>
+                </div>
               </div>
             </motion.div>
           </AnimatePresence>
@@ -2442,7 +2588,7 @@ function ContactPage() {
                         className="w-full bg-[#F8FAFB] border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#0C2D1C] outline-none focus:border-[#18A558] transition-colors"
                         style={{ fontFamily: "Inter, sans-serif" }}>
                         <option value="">Select service</option>
-                        {["Termite Management", "Cockroach Management", "Rodent Management", "Bed Bug Management", "Mosquito Management", "Flies Management", "Wood Borer Management", "Spider Management", "Snake Management", "Bird Control", "Food Storage Management", "Disinfection", "Commercial Pest Audit", "Water Proof & Leakage Services", "General Pest Control"].map((s) => <option key={s}>{s}</option>)}
+                        {["Termite Management", "Cockroach Management", "Rodent Management", "Bed Bug Management", "Mosquito Management", "Flies Management", "Wood Borer Management", "Spider Management", "Bird Control", "Food Storage Management", "Disinfection", "Commercial Pest Audit", "Water Proof & Leakage Services", "General Pest Control"].map((s) => <option key={s}>{s}</option>)}
                       </select>
                     </div>
                   </div>

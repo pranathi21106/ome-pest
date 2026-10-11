@@ -430,7 +430,7 @@ export function IntroSplash({ onComplete, isReplay = false }: IntroSplashProps) 
                   Insects Clearing Out Complete!
                 </div>
                 <p className="text-white/80 text-xs font-semibold" style={{ fontFamily: "Inter, sans-serif" }}>
-                  Preparing Official OME Brand Reveal...
+                  Preparing Official OME PEST Brand Reveal...
                 </p>
               </motion.div>
             )}
